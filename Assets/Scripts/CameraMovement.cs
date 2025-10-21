@@ -6,15 +6,11 @@ public class CameraMovemnt : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] Vector3 move;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
+        // Move camera when arrow keys are pressed
         move = Vector2.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
