@@ -12,7 +12,7 @@ public class Plot : MonoBehaviour{
     private GameObject placedTower; // creates a reference to the placed tower so it can be upgraded/destroyed later if needed
 
     void OnMouseDown(){ // when the user clicks on their mouse...
-        if (isEmpty == false){ // If the plot is not free
+        if (isEmpty == false){ // if the plot is not free
             Debug.Log("Error: This plot already has a tower in it!"); // sends an error message to the console
             return; // stops the rest of the function from running
         }
