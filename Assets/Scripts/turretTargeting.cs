@@ -72,7 +72,7 @@ public class turretTargeting : MonoBehaviour
     
     void HandleEnemyDestroyed(EnemyMovement destroyedEnemy)
     {
-        Debug.Log("detected");
+        //Debug.Log("detected");
         enemiesInRange.Remove(destroyedEnemy.gameObject);
         TargetSelect();
     }
@@ -115,5 +115,10 @@ public class turretTargeting : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         projectile.GetComponent<ProjectileMovement>().SetTarget(currentTarget);
+    }
+    // Add this to your existing turretTargeting class
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
     }
 }
