@@ -47,4 +47,6 @@ public class EnemySpawning : MonoBehaviour
 
         enemiesAliveText.text = aliveCount.ToString() + " enemies left";
     }
+
+
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public float enemyDistance;
     [SerializeField] float moveSpeed;
     [SerializeField] GameObject checkpointParent; // Initial GameObject holding all checkpoints needed to copy over into allCheckpoints
     private List<GameObject> allCheckpoints = new List<GameObject>(); // List holding all checkpoints for this enemy's path
     private GameObject nextCheckpoint; // Next checkpoint GameObject to move towards
-    private int currentCheckpointIndex; // Index holding what checkpoint the enemy needs to move to next
+    [SerializeField] int currentCheckpointIndex; // Index holding what checkpoint the enemy needs to move to next
+    public static event Action<EnemyMovement> OnEnemyDestroyed; // A system event to trigger when enemy destroyed
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,8 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateDistance();
+        
         if (currentCheckpointIndex < allCheckpoints.Count)
         {
             Vector3 targetPos = nextCheckpoint.transform.position;
@@ -37,6 +43,7 @@ public class EnemyMovement : MonoBehaviour
                 AdvanceCheckpoint();
             }
         }
+
     }
 
     // EnemySpawning tells this enemy what path they are on by assigning the correct checkpointParent
@@ -82,6 +89,19 @@ public class EnemyMovement : MonoBehaviour
     // Call function to remove enemy from alive list
     private void OnDestroy()
     {
+        OnEnemyDestroyed?.Invoke(this);
         EnemySpawning.instance.RemoveEnemy(gameObject);
+    }
+
+    public float GetDistance()
+    {
+        return enemyDistance;
+    }
+    private void CalculateDistance()
+    {
+        Vector3 targetPos = nextCheckpoint.transform.position;
+        targetPos.y = transform.position.y;
+
+        enemyDistance = (currentCheckpointIndex * 1000) - Vector3.Distance(transform.position, targetPos);
     }
 }

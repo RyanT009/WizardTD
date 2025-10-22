@@ -9,12 +9,24 @@ public class turretRotation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.FindWithTag("enemy");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(enemy.transform);
+        if (enemy != null)
+        {
+            Vector3 targetPosition = enemy.transform.position; //Get position of enemy
+            targetPosition.y = transform.position.y; //Set y axis to same as turret to lock x and z rotation
+            transform.LookAt(targetPosition);
+        }
+
+        
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        enemy = target;
     }
 }
