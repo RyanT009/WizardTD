@@ -44,7 +44,7 @@ public class TowerUIManager : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
         // Offset downwards
-        screenPos.y -= 60f;
+        screenPos.y -= 45f;
 
         // Move the panel
         towerPanel.transform.position = screenPos;
