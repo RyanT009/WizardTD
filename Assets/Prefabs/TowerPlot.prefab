@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992ce3c2068252d4494426e6c2a18c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 7929904551192538552, guid: d674a2901a4e7ec42a9db42b912b499c, type: 3}
+  towerPrefab: {fileID: 7929904551192538552, guid: d674a2901a4e7ec42a9db42b912b499c, type: 3}
+  towerOffset: {x: 0, y: 0.5, z: 0}

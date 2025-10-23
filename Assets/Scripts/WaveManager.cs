@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] EnemyWave[] waves; // List containing all waves
     [SerializeField] EnemySpawning enemySpawner; // Enemy spawning script
     [SerializeField] TextMeshProUGUI waveNumberText;
+    [SerializeField] float timeBetweenWaves;
 
 
     private void Start()
@@ -34,7 +35,7 @@ public class WaveManager : MonoBehaviour
 
             yield return new WaitUntil(() => EnemySpawning.aliveCount == 0); // Wait until all enemies are dead
 
-            yield return new WaitForSeconds(3f); // Wait to start next wave
+            yield return new WaitForSeconds(timeBetweenWaves); // Wait to start next wave
         }
 
         Debug.Log("All waves complete!");
