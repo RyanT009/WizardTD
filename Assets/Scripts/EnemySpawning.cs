@@ -7,6 +7,7 @@ public class EnemySpawning : MonoBehaviour
 {
     public static EnemySpawning instance;
     public static int aliveCount = 0;
+    public static int enemiesLeft = 0;
 
     [SerializeField] List<GameObject> checkPointParents; // Parent objects holding checkpoints for each path
     [SerializeField] List<GameObject> enemiesAlive; // List holding all enemies alive
@@ -36,16 +37,22 @@ public class EnemySpawning : MonoBehaviour
         aliveCount++;
         enemiesAlive.Add(enemy);
 
-        enemiesAliveText.text = aliveCount.ToString() + " enemies left";
     }
 
     // Decrement alive count, remove enemy from alive list, update enemiesAliveText
     public void RemoveEnemy(GameObject enemy)
     {
         aliveCount--;
+        enemiesLeft--;
         enemiesAlive.Remove(enemy);
 
-        enemiesAliveText.text = aliveCount.ToString() + " enemies left";
+        enemiesAliveText.text = enemiesLeft.ToString() + " enemies left";
+    }
+
+    public void SetInitialEnemyCount(int enemyCount)
+    {
+        enemiesLeft = enemyCount;
+        enemiesAliveText.text = enemiesLeft.ToString() + " enemies left";
     }
 
 

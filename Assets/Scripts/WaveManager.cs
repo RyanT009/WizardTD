@@ -31,6 +31,13 @@ public class WaveManager : MonoBehaviour
             Debug.Log("Starting Wave " + (i + 1).ToString());
             waveNumberText.text = "Wave " + (i + 1).ToString();
 
+            int enemyCount = 0;
+            foreach (var group in waves[i].enemyGroups)
+            {
+                enemyCount += group.count;
+            }
+            enemySpawner.SetInitialEnemyCount(enemyCount);
+
             yield return StartCoroutine(SpawnWave(waves[i])); // Call spawning of groups
 
             yield return new WaitUntil(() => EnemySpawning.aliveCount == 0); // Wait until all enemies are dead
