@@ -23,9 +23,12 @@ public class EnemySpawning : MonoBehaviour
     {
         int spawnPointIndex = Random.Range(0, checkPointParents.Count); // Pick a random path
         Vector3 spawnPos = checkPointParents[spawnPointIndex].transform.GetChild(0).position; // Set spawn point to first invisible checkpoint
-        spawnPos.y = (enemyPrefab.transform.localScale.y + 3f) / 2f; // Set enemy y pos to be above gorund
+        spawnPos.y = (enemyPrefab.transform.localScale.y + 0f) / 2f; // Set enemy y pos to be above gorund
 
         GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity); // Spawn enemy
+        
+
+
         enemy.GetComponent<EnemyMovement>().SetCheckpointParent(checkPointParents[spawnPointIndex]); // Tell enemy what path it is on
 
         AddEnemy(enemy); // Add to enemiesAlive list

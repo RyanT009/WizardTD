@@ -31,12 +31,18 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector3 targetPos = nextCheckpoint.transform.position;
             targetPos.y = transform.position.y;
+            Vector3 direction = targetPos - transform.position;
 
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPos,
                 moveSpeed * Time.deltaTime
             );
+
+            if (direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }
 
             if (Vector3.Distance(transform.position, targetPos) < 0.001f)
             {

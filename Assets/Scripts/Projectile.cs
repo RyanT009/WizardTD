@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMovement : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField] GameObject target;
     [SerializeField] float movementSpeed;
+    [SerializeField] float damage;
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -13,7 +14,7 @@ public class ProjectileMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    
+
     void FixedUpdate()
     {
         // If the projectile has a target, calculate the direction and move towards the target
@@ -22,19 +23,30 @@ public class ProjectileMovement : MonoBehaviour
             Vector3 direction = (target.transform.position - transform.position).normalized;
             rb.velocity = direction * movementSpeed;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
 
     public void SetTarget(GameObject enemy)
     {
         target = enemy;
     }
+    
+    public void PassDamage(float turretDamage)
+    {
+        damage = turretDamage;
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        // If the projectile hits the target, destroy it
+        // If the projectile hits the target, damage it
         if (other.gameObject == target)
         {
-            Destroy(other.gameObject);
+            EnemyBehaviour behaviourScript = target.GetComponent<EnemyBehaviour>();
+            behaviourScript.damageTaken(damage); //Call function within enemyBehaviour
             Destroy(gameObject);
         }
     }

@@ -113,8 +113,9 @@ public class turretTargeting : MonoBehaviour
     
     void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        projectile.GetComponent<ProjectileMovement>().SetTarget(currentTarget);
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity); //Spawn a projectile
+        projectile.GetComponent<Projectile>().SetTarget(currentTarget); // Pass in the target object
+        projectile.GetComponent<Projectile>().PassDamage(damage); //Pass in the damage of the tower
     }
     // Add this to your existing turretTargeting class
     public void SetDamage(float newDamage)
