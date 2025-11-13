@@ -1,7 +1,7 @@
-WizardTD v0.2
+WizardTD v0.3
 
 A tower defence game where enemies are spawned in 5 increasingly more difficult waves.
-Enemies make their way (from multiple directions) towards your central fortress.
+Enemies of varying sizes and speeds make their way (from multiple directions) towards your central fortress.
 Towers that shoot and destroy enemies can be placed on plots, and can also be upgraded, downgraded and destroyed between three exciting stages: Archer Tower, Cannon, and Tesla Tower.
 
 Credits:
