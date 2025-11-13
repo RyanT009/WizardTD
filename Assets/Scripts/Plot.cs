@@ -11,6 +11,13 @@ public class Plot : MonoBehaviour {
     private GameObject placedTower; // Reference to the placed tower
     private int currentLevel = 1; // Current Tower Level
 
+    [SerializeField] GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+    }
+
     void OnMouseDown() { // when the user clicks on their mouse...
 
 
@@ -21,13 +28,19 @@ public class Plot : MonoBehaviour {
             return;
         }
 
-        // If the plot is empty
-        Vector3 spawnPosition = transform.position + towerOffset; // Calculate tower spawn position
-        placedTower = Instantiate(towerPrefab, spawnPosition, Quaternion.identity); // Spawn the tower on the plot
-        placedTower.transform.SetParent(transform, true); // Makes the tower a child of the plot so if the plot is deleted, the tower will be deleted with it.
-        isEmpty = false; // Flag the plot as now no longer empty so that no new towers can be placed on it
+        if (gameManager.GetCurrency() >= 50)
+        {
+            // If the plot is empty
+            Vector3 spawnPosition = transform.position + towerOffset; // Calculate tower spawn position
+            placedTower = Instantiate(towerPrefab, spawnPosition, Quaternion.identity); // Spawn the tower on the plot
+            placedTower.transform.SetParent(transform, true); // Makes the tower a child of the plot so if the plot is deleted, the tower will be deleted with it.
+            isEmpty = false; // Flag the plot as now no longer empty so that no new towers can be placed on it
 
-        TowerUIManager.Instance.HideUpgradeUI(); // Hide upgrade menu
+            gameManager.ChangeMoney(-50);
+
+            TowerUIManager.Instance.HideUpgradeUI(); // Hide upgrade menu
+        }
+
         //Debug.Log("Success: Tower placed in the plot!"); // Confirms tower placement by printing confirmation in console
     }
 //    public void UpgradeTower()
@@ -59,16 +72,19 @@ public class Plot : MonoBehaviour {
             if (targeting != null){
                 
                 // Increase damage based on level
-                if (currentLevel == 1){
+                if (currentLevel == 1 && gameManager.GetCurrency() >= 100){
                     targeting.SetDamage(20f); // Level 2 damage
                     SwitchTowerModel(2);
                     currentLevel = 2;
+                    gameManager.ChangeMoney(-100);
                 }
 
-                else if (currentLevel == 2){
+                else if (currentLevel == 2 && gameManager.GetCurrency() >= 200)
+                {
                     targeting.SetDamage(30f); // Level 3 damage
                     SwitchTowerModel(3);
                     currentLevel = 3;
+                    gameManager.ChangeMoney(-200);
                 }
 
                 else{
@@ -152,6 +168,8 @@ public class Plot : MonoBehaviour {
             placedTower = null;
             isEmpty = true;
             Debug.Log("Tower destroyed!");
+
+            gameManager.ChangeMoney(50);
         }
     }
 }

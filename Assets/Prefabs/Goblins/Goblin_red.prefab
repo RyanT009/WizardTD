@@ -547,7 +547,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDistance: 0
-  moveSpeed: 15
+  moveSpeed: 50
   checkpointParent: {fileID: 0}
   currentCheckpointIndex: 0
 --- !u!114 &8131878388373878411
@@ -584,6 +584,7 @@ MonoBehaviour:
   maxHealth: 10
   healthBarPrefab: {fileID: 8727687580226455442, guid: 0d4d4088507313c45a7185a06df083a2, type: 3}
   castle: {fileID: 0}
+  gameManager: {fileID: 0}
   canvas: {fileID: 0}
 --- !u!1 &1300070071406548
 GameObject:

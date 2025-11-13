@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CastleManager : MonoBehaviour
 {
-    [SerializeField] HealthBar healthBar;
+    [SerializeField] CastleHealthBar healthBar;
     public Canvas canvas;
     [SerializeField] float maxHealth;
     public float currentHealth;
@@ -19,13 +20,16 @@ public class CastleManager : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other){
-            damageTaken(20f);
-            Debug.Log("Castle took damage!");
+    void OnTriggerEnter(Collider other)
+    {
+        damageTaken(20f);
+        Debug.Log("Castle took damage!");
+        Destroy(other.gameObject);
+        //^ this doesnt work
     }
 
 
-    public void damageTaken(float damage)
+    private void damageTaken(float damage)
     {
         if (currentHealth - damage <= 0)
         {

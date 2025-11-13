@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int currency;
+    [SerializeField] int currency;
     [SerializeField] TextMeshProUGUI currencyText;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        currency = 250;
-        updateCurrency();
+        currencyText.text = "Gold: " + currency;
     }
 
     // Update is called once per frame
@@ -21,9 +20,15 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    
-    void updateCurrency()
+
+    public void ChangeMoney(int amount)
     {
+        currency += amount;
         currencyText.text = "Gold: " + currency;
+    }
+
+    public int GetCurrency()
+    {
+        return currency;
     }
 }

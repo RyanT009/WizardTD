@@ -10,6 +10,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] HealthBar healthBarPrefab;
     private HealthBar thisHealthBar;
     [SerializeField] CastleManager castle;
+    [SerializeField] GameManager gameManager;
 
     public Canvas canvas;
 
@@ -21,6 +22,8 @@ public class EnemyBehaviour : MonoBehaviour
         Canvas canvas = FindFirstObjectByType<Canvas>();
         thisHealthBar = Instantiate(healthBarPrefab, canvas.transform);
         thisHealthBar.Initialize(transform, new Vector3(0,20F,0));
+
+        gameManager = FindFirstObjectByType<GameManager>();
         
     }
 
@@ -42,14 +45,10 @@ public class EnemyBehaviour : MonoBehaviour
             thisHealthBar.setHealth(currentHealth, maxHealth);
         }
     }
-
-    public void castleReached()
-    {
-        Destroy(gameObject);
-    }
     
     public void death()
     {
+        gameManager.ChangeMoney(100);
         Destroy(gameObject);
     }
 }
