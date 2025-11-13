@@ -9,6 +9,7 @@ public class TowerUIManager : MonoBehaviour
 
     [SerializeField] private GameObject towerPanel;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button downgradeButton;
     [SerializeField] private Button destroyButton;
     [SerializeField] private Button closeButton;
 
@@ -29,7 +30,14 @@ public class TowerUIManager : MonoBehaviour
     void Start()
     {
         // Listen for when the buttons are clicked
+
+        Debug.Log("Upgrade button: " + upgradeButton);
+        Debug.Log("Downgrade button: " + downgradeButton);
+        Debug.Log("Destroy button: " + destroyButton);
+        Debug.Log("Close button: " + closeButton);
+
         upgradeButton.onClick.AddListener(OnUpgradeClicked);
+        downgradeButton.onClick.AddListener(OnDowngradeClicked);
         destroyButton.onClick.AddListener(OnDestroyClicked);
         closeButton.onClick.AddListener(OnCloseClicked);
         HideUpgradeUI();
@@ -64,6 +72,12 @@ public class TowerUIManager : MonoBehaviour
         if (currentSelectedPlot != null)
         {
             currentSelectedPlot.UpgradeTower();
+            HideUpgradeUI();
+        }
+    }
+    void OnDowngradeClicked(){
+        if (currentSelectedPlot != null){
+            currentSelectedPlot.DowngradeTower();
             HideUpgradeUI();
         }
     }

@@ -9,8 +9,7 @@ public class CastleManager : MonoBehaviour
     [SerializeField] float maxHealth;
     public float currentHealth;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         currentHealth = maxHealth;
     }
 
@@ -20,12 +19,11 @@ public class CastleManager : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        GameObject enemy = collision.gameObject;
-        enemy.GetComponent<EnemyBehaviour>().castleReached();
-        damageTaken(20);
+    void OnTriggerEnter(Collider other){
+            damageTaken(20f);
+            Debug.Log("Castle took damage!");
     }
+
 
     public void damageTaken(float damage)
     {

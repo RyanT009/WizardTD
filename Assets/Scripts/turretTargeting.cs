@@ -38,7 +38,13 @@ public class turretTargeting : MonoBehaviour
             Shoot();
         }
     }
-    
+
+    void Awake(){ // reference itself when downgraded
+        if (rotationScript == null){
+            rotationScript = GetComponent<turretRotation>();
+        }
+    }
+
     private void OnEnable()
     {
         EnemyMovement.OnEnemyDestroyed += HandleEnemyDestroyed;
@@ -103,9 +109,12 @@ public class turretTargeting : MonoBehaviour
         }
 
         currentTarget = frontEnemy;
-        rotationScript.SetTarget(frontEnemy);
+
+        if (rotationScript != null){
+            rotationScript.SetTarget(frontEnemy);
+        }
     }
-    
+
     void RemoveNullEnemies()
     {
         enemiesInRange.RemoveAll(item => item == null);
