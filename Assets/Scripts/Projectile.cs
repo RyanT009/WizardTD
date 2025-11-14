@@ -23,9 +23,9 @@ public class Projectile : MonoBehaviour
             Vector3 direction = (target.transform.position - transform.position).normalized;
             rb.velocity = direction * movementSpeed;
         }
-        else
+        else // If enemy is destroyed for whatever reason
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //Destroy projectile
         }
     }
 

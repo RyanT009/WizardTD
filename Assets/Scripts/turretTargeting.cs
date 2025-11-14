@@ -16,6 +16,7 @@ public class turretTargeting : MonoBehaviour
     [SerializeField] List<GameObject> enemiesInRange;
     [SerializeField] turretRotation rotationScript;
     
+    
 
 
     // Start is called before the first frame update
@@ -47,12 +48,12 @@ public class turretTargeting : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyMovement.OnEnemyDestroyed += HandleEnemyDestroyed;
+        EnemyBehaviour.OnEnemyKilled += HandleEnemyKilled;
     }
 
     private void OnDisable()
     {
-        EnemyMovement.OnEnemyDestroyed -= HandleEnemyDestroyed;
+        EnemyBehaviour.OnEnemyKilled -= HandleEnemyKilled;
     }
 
     void OnTriggerEnter(Collider other) // Triggers when entering range
@@ -68,6 +69,7 @@ public class turretTargeting : MonoBehaviour
 
     void OnTriggerExit(Collider other) // Triggers when exiting range
     {
+        
         if (other.tag == "enemy")
         {
             enemiesInRange.Remove(other.gameObject);
@@ -76,10 +78,10 @@ public class turretTargeting : MonoBehaviour
 
     }
     
-    void HandleEnemyDestroyed(EnemyMovement destroyedEnemy)
+    void HandleEnemyKilled(EnemyBehaviour killedEnemy)
     {
         //Debug.Log("detected");
-        enemiesInRange.Remove(destroyedEnemy.gameObject);
+        enemiesInRange.Remove(killedEnemy.gameObject);
         TargetSelect();
     }
 

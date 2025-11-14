@@ -31,10 +31,10 @@ public class TowerUIManager : MonoBehaviour
     {
         // Listen for when the buttons are clicked
 
-        Debug.Log("Upgrade button: " + upgradeButton);
-        Debug.Log("Downgrade button: " + downgradeButton);
-        Debug.Log("Destroy button: " + destroyButton);
-        Debug.Log("Close button: " + closeButton);
+        //Debug.Log("Upgrade button: " + upgradeButton);
+        //Debug.Log("Downgrade button: " + downgradeButton);
+        //Debug.Log("Destroy button: " + destroyButton);
+        //Debug.Log("Close button: " + closeButton);
 
         upgradeButton.onClick.AddListener(OnUpgradeClicked);
         downgradeButton.onClick.AddListener(OnDowngradeClicked);

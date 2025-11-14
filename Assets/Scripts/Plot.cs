@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Plot : MonoBehaviour {
+public class Plot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     [SerializeField] GameObject towerPrefab; // What tower is being placed
+
+    [SerializeField] Material normalMaterial;
+    [SerializeField] Material hoverMaterial;
+    private Renderer rend;
     [SerializeField] Vector3 towerOffset; // Tower placement offset from the plot
     private bool isEmpty = true; // Is the plot empty
     private GameObject placedTower; // Reference to the placed tower
@@ -16,6 +20,7 @@ public class Plot : MonoBehaviour {
     private void Start()
     {
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        rend = GetComponent<Renderer>();
     }
 
     void OnMouseDown() { // when the user clicks on their mouse...
@@ -30,6 +35,7 @@ public class Plot : MonoBehaviour {
 
         if (gameManager.GetCurrency() >= 50)
         {
+            Debug.Log("spawned");
             // If the plot is empty
             Vector3 spawnPosition = transform.position + towerOffset; // Calculate tower spawn position
             placedTower = Instantiate(towerPrefab, spawnPosition, Quaternion.identity); // Spawn the tower on the plot
@@ -42,6 +48,16 @@ public class Plot : MonoBehaviour {
         }
 
         //Debug.Log("Success: Tower placed in the plot!"); // Confirms tower placement by printing confirmation in console
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        rend.material = hoverMaterial;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        rend.material = normalMaterial;
     }
 //    public void UpgradeTower()
 //    {

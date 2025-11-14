@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -29.6, y: 1, z: -7.1}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,4 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 7929904551192538552, guid: d674a2901a4e7ec42a9db42b912b499c, type: 3}
+  normalMaterial: {fileID: 2100000, guid: df510a98f3b1ce14ba31cd89e809f74b, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: 01a24fbd216582e43b271b22b11a7436, type: 2}
   towerOffset: {x: 0, y: 0.5, z: 0}
+  gameManager: {fileID: 0}

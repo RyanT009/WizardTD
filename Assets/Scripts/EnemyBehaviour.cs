@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -11,8 +13,10 @@ public class EnemyBehaviour : MonoBehaviour
     private HealthBar thisHealthBar;
     [SerializeField] CastleManager castle;
     [SerializeField] GameManager gameManager;
-
+    [SerializeField] Animator animator;
     public Canvas canvas;
+    public static event Action<EnemyBehaviour> OnEnemyKilled; // A system event to trigger when enemy destroyed
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (currentHealth - damage <= 0)
         {
+            currentHealth -= damage;
+            thisHealthBar.setHealth(currentHealth, maxHealth);
             death();
         }
         else
@@ -48,7 +54,18 @@ public class EnemyBehaviour : MonoBehaviour
     
     public void death()
     {
-        gameManager.ChangeMoney(100);
-        Destroy(gameObject);
+        Debug.Log("death");
+        gameManager.ChangeMoney(100); // Increase money
+        OnEnemyKilled?.Invoke(this); // Trigger event
+        EnemySpawning.instance.RemoveEnemy(gameObject); // Remove
+        GetComponent<EnemyMovement>().enabled = false; //Disable movement
+        animator.SetBool("Death", true);
+        Invoke("FadeOut",0f);
+        //Destroy(gameObject);
+    }
+
+    void FadeOut()
+    {
+        Destroy(gameObject,2f);
     }
 }

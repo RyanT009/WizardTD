@@ -45,6 +45,7 @@ public class EnemySpawning : MonoBehaviour
     // Decrement alive count, remove enemy from alive list, update enemiesAliveText
     public void RemoveEnemy(GameObject enemy)
     {
+        Debug.Log("removed enemy");
         aliveCount--;
         enemiesLeft--;
         enemiesAlive.Remove(enemy);

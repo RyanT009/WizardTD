@@ -12,7 +12,9 @@ public class EnemyMovement : MonoBehaviour
     private List<GameObject> allCheckpoints = new List<GameObject>(); // List holding all checkpoints for this enemy's path
     private GameObject nextCheckpoint; // Next checkpoint GameObject to move towards
     [SerializeField] int currentCheckpointIndex; // Index holding what checkpoint the enemy needs to move to next
-    public static event Action<EnemyMovement> OnEnemyDestroyed; // A system event to trigger when enemy destroyed
+
+
+    
 
 
     // Start is called before the first frame update
@@ -87,17 +89,13 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             // Kill the enemy when it hits the fortress
-            Debug.Log("Last checkpoint reached");
+            //Debug.Log("Last checkpoint reached");
             Destroy(gameObject);
         }
     }
 
     // Call function to remove enemy from alive list
-    private void OnDestroy()
-    {
-        OnEnemyDestroyed?.Invoke(this);
-        EnemySpawning.instance.RemoveEnemy(gameObject);
-    }
+   
 
     public float GetDistance()
     {

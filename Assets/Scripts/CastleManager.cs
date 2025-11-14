@@ -22,10 +22,14 @@ public class CastleManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        damageTaken(20f);
-        Debug.Log("Castle took damage!");
-        Destroy(other.gameObject);
-        //^ this doesnt work
+        if(other.tag == "enemy")
+        {
+            Debug.Log(other.tag);
+            damageTaken(20f);
+            Debug.Log("Castle took damage!");
+            Destroy(other.gameObject);
+        }
+        
     }
 
 
