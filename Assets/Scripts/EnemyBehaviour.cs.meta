@@ -3,7 +3,13 @@ guid: e9fb07cf875c181478a0e75c0d0b472f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthBarPrefab: {instanceID: 0}
+  - castle: {instanceID: 0}
+  - gameManager: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - goldCoinPrefab: {fileID: 1498403948531744, guid: 5864d2639fbc5e945815a4c54d3067f0, type: 3}
+  - canvas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

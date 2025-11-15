@@ -14,6 +14,11 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] CastleManager castle;
     [SerializeField] GameManager gameManager;
     [SerializeField] Animator animator;
+
+    public GameObject goldCoinPrefab; // Spinning Gold Coin
+    [SerializeField] float coinSpinDuration = 1f; // Spin Duration
+    [SerializeField] float coinFadeDelay = 2f;   // Fade Delay
+
     public Canvas canvas;
     public static event Action<EnemyBehaviour> OnEnemyKilled; // A system event to trigger when enemy destroyed
 
@@ -56,12 +61,39 @@ public class EnemyBehaviour : MonoBehaviour
     {
         Debug.Log("death");
         gameManager.ChangeMoney(100); // Increase money
+        SpawnGoldCoin(); // Spawns a coin next to the dead enemy
         OnEnemyKilled?.Invoke(this); // Trigger event
         EnemySpawning.instance.RemoveEnemy(gameObject); // Remove
         GetComponent<EnemyMovement>().enabled = false; //Disable movement
         animator.SetBool("Death", true);
         Invoke("FadeOut",0f);
         //Destroy(gameObject);
+    }
+
+    void SpawnGoldCoin(){
+
+        if (goldCoinPrefab == null){
+            Debug.LogError("goldCoinPrefab is still null!");
+            return;
+        }
+
+        // Spawn coin
+        GameObject coin = Instantiate(goldCoinPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
+
+        // Spin  coin for n duration
+        StartCoroutine(SpinCoin(coin.transform, coinSpinDuration));
+
+        // Destroy the coin after fading
+        Destroy(coin, coinFadeDelay);
+    }
+
+    IEnumerator SpinCoin(Transform coin, float duration){
+        float elapsed = 0f;
+        while (elapsed < duration){
+            coin.Rotate(0, 360 * Time.deltaTime / duration, 0); // Spins around Y axis
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     void FadeOut()

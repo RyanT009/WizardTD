@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currencyText.text = "Gold: " + currency;
+        currencyText.text = currency.ToString("N0");
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public void ChangeMoney(int amount)
     {
         currency += amount;
-        currencyText.text = "Gold: " + currency;
+        currencyText.text = currency.ToString("N0");
     }
 
     public int GetCurrency()

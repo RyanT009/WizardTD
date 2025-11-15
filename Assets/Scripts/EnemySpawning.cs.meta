@@ -3,7 +3,9 @@ guid: 0f26af2af25e929408c40f8178b3655a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - goldCoinPrefabReference: {fileID: 1498403948531744, guid: 5864d2639fbc5e945815a4c54d3067f0, type: 3}
+  - enemiesAliveText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

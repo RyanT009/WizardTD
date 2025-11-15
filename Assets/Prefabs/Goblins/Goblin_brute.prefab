@@ -775,6 +775,9 @@ MonoBehaviour:
   castle: {fileID: 0}
   gameManager: {fileID: 0}
   animator: {fileID: 4190874043919179926}
+  goldCoinPrefab: {fileID: 1950871307682000, guid: b5f88004820727f43bf06fd0327ed9de, type: 3}
+  coinSpinDuration: 1
+  coinFadeDelay: 2
   canvas: {fileID: 0}
 --- !u!1 &5018194464064030726
 GameObject:

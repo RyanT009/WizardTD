@@ -29,7 +29,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < waves.Length; i++)
         {
             Debug.Log("Starting Wave " + (i + 1).ToString());
-            waveNumberText.text = "Wave " + (i + 1).ToString();
+            waveNumberText.text = "WAVE: " + (i + 1).ToString("00");
 
             int enemyCount = 0;
             foreach (var group in waves[i].enemyGroups)
