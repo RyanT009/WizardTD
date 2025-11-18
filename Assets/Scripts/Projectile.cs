@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
         // If the projectile has a target, calculate the direction and move towards the target
-        if (target != null)
+        if (target.GetComponent<EnemyBehaviour>().AliveCheck() == true)
         {
             Vector3 direction = (target.transform.position - transform.position).normalized;
             rb.velocity = direction * movementSpeed;
@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
+    /*
     private void OnEnable()
     {
         EnemyBehaviour.OnEnemyKilled += HandleEnemyKilled;
@@ -69,6 +69,7 @@ public class Projectile : MonoBehaviour
     }
 
     // broken
+    
     void HandleEnemyKilled(EnemyBehaviour killedEnemy)
     {
         Debug.Log("PROJ KILLED1");
@@ -77,5 +78,5 @@ public class Projectile : MonoBehaviour
             Debug.Log("PROJ KILLED2");
             Destroy(gameObject);
         }
-    }
+    }*/
 }

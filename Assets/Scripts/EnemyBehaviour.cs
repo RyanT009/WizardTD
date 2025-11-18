@@ -77,18 +77,19 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else // If enemy hit the castle
         {
+            currentHealth = 0;
             castle.TakeDamage(damageToCastle);
         }
 
         OnEnemyKilled?.Invoke(this); // Trigger kill event for turrets to stop targeting
         EnemySpawning.instance.RemoveEnemy(gameObject); // Remove from enemy spawner / total enemy count
 
-        thisHealthBar.KillHealthbar();
+        thisHealthBar.KillHealthbar(); // Destroy health bar
 
         GetComponent<EnemyMovement>().enabled = false; //Disable movement
-        animator.SetBool("Death", true);
+        animator.SetBool("Death", true); // Trigger death animation
 
-        StartSink();
+        StartSink(); // Animate model to sink through floor
     }
 
     /*
@@ -118,6 +119,18 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
     */
+
+    public bool AliveCheck()
+    {
+        if (currentHealth <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     // To be implemented
     void StartSink()
