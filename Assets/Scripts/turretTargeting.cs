@@ -3,21 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class turretTargeting : MonoBehaviour
+public class TurretTargeting : MonoBehaviour
 {
 
     [SerializeField] float range;
     [SerializeField] float shootTime;
     [SerializeField] float damage;
     private float shootTimer;
+
+
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Vector3 projectileSpawnOffset;
+
     [SerializeField] GameObject currentTarget;
+
     private SphereCollider targetingField;
     [SerializeField] List<GameObject> enemiesInRange;
-    [SerializeField] turretRotation rotationScript;
+    private TurretRotation rotationScript;
     
-    
-
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,8 @@ public class turretTargeting : MonoBehaviour
         targetingField = GetComponent<SphereCollider>();
 
         targetingField.radius = range;
+
+        rotationScript = GetComponent<TurretRotation>();
 
         
     }
@@ -40,10 +45,9 @@ public class turretTargeting : MonoBehaviour
         }
     }
 
-    void Awake(){ // reference itself when downgraded
-        if (rotationScript == null){
-            rotationScript = GetComponent<turretRotation>();
-        }
+    public GameObject GetTarget()
+    {
+        return currentTarget;
     }
 
     private void OnEnable()
@@ -112,7 +116,8 @@ public class turretTargeting : MonoBehaviour
 
         currentTarget = frontEnemy;
 
-        if (rotationScript != null){
+        if (rotationScript != null)
+        {
             rotationScript.SetTarget(frontEnemy);
         }
     }
@@ -121,13 +126,40 @@ public class turretTargeting : MonoBehaviour
     {
         enemiesInRange.RemoveAll(item => item == null);
     }
-    
+
     void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity); //Spawn a projectile
-        projectile.GetComponent<Projectile>().SetTarget(currentTarget); // Pass in the target object
-        projectile.GetComponent<Projectile>().PassDamage(damage); //Pass in the damage of the tower
+        // Start at turret position
+        Vector3 spawnPos = transform.position;
+
+        if (rotationScript != null)
+        {
+            Quaternion barrelRot = rotationScript.GetObjectRotation();
+
+            // Apply rotation only to the forward (Z) and sideways (X) offsets
+            Vector3 horizontalOffset = new Vector3(projectileSpawnOffset.x, 0f, projectileSpawnOffset.z);
+            spawnPos += barrelRot * horizontalOffset;
+
+            // Apply vertical offset separately
+            spawnPos.y += projectileSpawnOffset.y;
+        }
+        else
+        {
+            // fallback if no rotationScript
+            spawnPos += projectileSpawnOffset;
+        }
+
+        // Spawn projectile unrotated
+        GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
+
+        // Pass target and damage
+        Projectile projScript = projectile.GetComponent<Projectile>();
+        projScript.SetTarget(currentTarget);
+        projScript.PassDamage(damage);
     }
+
+
+
     // Add this to your existing turretTargeting class
     public void SetDamage(float newDamage)
     {

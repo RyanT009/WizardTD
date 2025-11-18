@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 8146320952671490942}
   - component: {fileID: 6071788941256303177}
   m_Layer: 0
-  m_Name: Goblin_brute
+  m_Name: BigGoblin
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -667,7 +667,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5612894468782980774}
@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDistance: 0
-  moveSpeed: 5
+  moveSpeed: 10
   checkpointParent: {fileID: 0}
   currentCheckpointIndex: 0
 --- !u!114 &6071788941256303177
@@ -770,15 +770,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fb07cf875c181478a0e75c0d0b472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  healthBarPrefab: {fileID: 8727687580226455442, guid: 0d4d4088507313c45a7185a06df083a2, type: 3}
+  maxHealth: 30
+  currentHealth: 0
+  moneyWorth: 100
+  damageToCastle: 15
+  healthBarPrefab: {fileID: 6916663210486006858, guid: 91d83bc9fe8965f40b1d0e313c2cf931, type: 3}
   castle: {fileID: 0}
   gameManager: {fileID: 0}
   animator: {fileID: 4190874043919179926}
   goldCoinPrefab: {fileID: 1950871307682000, guid: b5f88004820727f43bf06fd0327ed9de, type: 3}
   coinSpinDuration: 1
   coinFadeDelay: 2
-  canvas: {fileID: 0}
+  sinkDelay: 1.5
+  sinkSpeed: 15
 --- !u!1 &5018194464064030726
 GameObject:
   m_ObjectHideFlags: 0

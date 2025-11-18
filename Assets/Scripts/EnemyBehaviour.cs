@@ -8,9 +8,14 @@ using Unity.VisualScripting;
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] float maxHealth;
-    private float currentHealth;
+    [SerializeField] float currentHealth;
+
+    [SerializeField] int moneyWorth;
+    [SerializeField] int damageToCastle;
+
     [SerializeField] HealthBar healthBarPrefab;
     private HealthBar thisHealthBar;
+
     [SerializeField] CastleManager castle;
     [SerializeField] GameManager gameManager;
     [SerializeField] Animator animator;
@@ -19,8 +24,11 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] float coinSpinDuration = 1f; // Spin Duration
     [SerializeField] float coinFadeDelay = 2f;   // Fade Delay
 
-    public Canvas canvas;
     public static event Action<EnemyBehaviour> OnEnemyKilled; // A system event to trigger when enemy destroyed
+
+    [SerializeField] float sinkDelay; // How long after dying to start sinking
+    [SerializeField] float sinkSpeed; // How fast to sink
+
 
 
     // Start is called before the first frame update
@@ -28,12 +36,15 @@ public class EnemyBehaviour : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        Canvas canvas = FindFirstObjectByType<Canvas>();
-        thisHealthBar = Instantiate(healthBarPrefab, canvas.transform);
-        thisHealthBar.Initialize(transform, new Vector3(0,20F,0));
+        GameObject worldCanvas = GameObject.FindGameObjectWithTag("worldCanvas");
+
+        thisHealthBar = Instantiate(healthBarPrefab, worldCanvas.transform);
+        thisHealthBar.Initialize(transform, new Vector3(0f, 20f, -4f));
+        thisHealthBar.transform.localScale *= 0.4f;
 
         gameManager = FindFirstObjectByType<GameManager>();
-        
+        castle = FindFirstObjectByType<CastleManager>();
+
     }
 
     // Update is called once per frame
@@ -42,34 +53,45 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    public void damageTaken(float damage)
+    public void TakeDamage(float damage)
     {
-        if (currentHealth - damage <= 0)
+        Debug.Log("DAMAGE: " + damage);
+        currentHealth -= damage;
+        thisHealthBar.SetHealth(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
         {
-            currentHealth -= damage;
-            thisHealthBar.setHealth(currentHealth, maxHealth);
-            death();
-        }
-        else
-        {
-            currentHealth -= damage;
-            thisHealthBar.setHealth(currentHealth, maxHealth);
+            Death(false);
         }
     }
     
-    public void death()
+    public void Death(bool hitCastle)
     {
         Debug.Log("death");
-        gameManager.ChangeMoney(100); // Increase money
-        SpawnGoldCoin(); // Spawns a coin next to the dead enemy
-        OnEnemyKilled?.Invoke(this); // Trigger event
-        EnemySpawning.instance.RemoveEnemy(gameObject); // Remove
+
+        if (!hitCastle) // If player killed the enemy
+        {
+            gameManager.ChangeMoney(moneyWorth); // Increase money
+
+            //SpawnGoldCoin(); // Spawns a coin next to the dead enemy
+        }
+        else // If enemy hit the castle
+        {
+            castle.TakeDamage(damageToCastle);
+        }
+
+        OnEnemyKilled?.Invoke(this); // Trigger kill event for turrets to stop targeting
+        EnemySpawning.instance.RemoveEnemy(gameObject); // Remove from enemy spawner / total enemy count
+
+        thisHealthBar.KillHealthbar();
+
         GetComponent<EnemyMovement>().enabled = false; //Disable movement
         animator.SetBool("Death", true);
-        Invoke("FadeOut",0f);
-        //Destroy(gameObject);
+
+        StartSink();
     }
 
+    /*
     void SpawnGoldCoin(){
 
         if (goldCoinPrefab == null){
@@ -95,9 +117,21 @@ public class EnemyBehaviour : MonoBehaviour
             yield return null;
         }
     }
+    */
 
-    void FadeOut()
+    // To be implemented
+    void StartSink()
     {
-        Destroy(gameObject,2f);
+        InvokeRepeating("Sink", sinkDelay, 1f / sinkSpeed);
+    }
+
+    void Sink()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
+
+        if (transform.position.y <= -5f)
+        {
+            Destroy(gameObject);
+        }
     }
 }

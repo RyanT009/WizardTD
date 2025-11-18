@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] int currency;
     [SerializeField] TextMeshProUGUI currencyText;
 
+    [SerializeField] UIManager uiManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        currencyText.text = currency.ToString("N0");
+        currencyText.text = "$" + currency;
+        uiManager.UpdateShopUI(currency);
     }
 
     // Update is called once per frame
@@ -24,7 +27,9 @@ public class GameManager : MonoBehaviour
     public void ChangeMoney(int amount)
     {
         currency += amount;
-        currencyText.text = currency.ToString("N0");
+        currencyText.text = "$" + currency;
+
+        uiManager.UpdateShopUI(currency);
     }
 
     public int GetCurrency()

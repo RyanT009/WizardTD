@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class turretRotation : MonoBehaviour
+public class TurretRotation : MonoBehaviour
 {
     private GameObject enemy = null;
+    [SerializeField] GameObject objectToRotate;
+
+    private Quaternion initialRotation;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialRotation = objectToRotate.transform.localRotation;
+
     }
 
     // Update is called once per frame
@@ -17,13 +21,22 @@ public class turretRotation : MonoBehaviour
     {
         if (enemy != null)
         {
-            Vector3 targetPosition = enemy.transform.position; //Get position of enemy
-            targetPosition.y = transform.position.y; //Set y axis to same as turret to lock x and z rotation
-            transform.LookAt(targetPosition);
-        }
+            Vector3 targetPosition = enemy.transform.position;
+            targetPosition.y = objectToRotate.transform.position.y; // Lock y axis
 
-        
+            // Calculate rotation towards target
+            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - objectToRotate.transform.position);
+
+            // Apply initial rotation as an offset
+            objectToRotate.transform.rotation = lookRotation * initialRotation;
+        }
     }
+
+    public Quaternion GetObjectRotation()
+    {
+        return objectToRotate.transform.rotation;
+    }
+
 
     public void SetTarget(GameObject target)
     {

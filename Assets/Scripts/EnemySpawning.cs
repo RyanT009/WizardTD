@@ -8,7 +8,6 @@ public class EnemySpawning : MonoBehaviour
     public static EnemySpawning instance;
     public static int aliveCount = 0;
     public static int enemiesLeft = 0;
-    public GameObject goldCoinPrefabReference; // Gold Coin dropped on death
 
     [SerializeField] List<GameObject> checkPointParents; // Parent objects holding checkpoints for each path
     [SerializeField] List<GameObject> enemiesAlive; // List holding all enemies alive
@@ -28,6 +27,7 @@ public class EnemySpawning : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity); // Spawn enemy
 
+        /*
         // Assign the gold coin prefab so the enemy can spawn coins when it dies
         EnemyBehaviour enemyScript = enemy.GetComponent<EnemyBehaviour>();
         if (enemyScript != null){
@@ -35,6 +35,7 @@ public class EnemySpawning : MonoBehaviour
             Debug.Log("Assigned gold coin prefab to " + enemy.name);
 
         }
+        */
 
 
         enemy.GetComponent<EnemyMovement>().SetCheckpointParent(checkPointParents[spawnPointIndex]); // Tell enemy what path it is on
@@ -58,13 +59,13 @@ public class EnemySpawning : MonoBehaviour
         enemiesLeft--;
         enemiesAlive.Remove(enemy);
 
-        enemiesAliveText.text = enemiesLeft.ToString() + " Remaining";
+        enemiesAliveText.text = enemiesLeft.ToString() + " enemies left";
     }
 
     public void SetInitialEnemyCount(int enemyCount)
     {
         enemiesLeft = enemyCount;
-        enemiesAliveText.text = enemiesLeft.ToString() + " Remaining";
+        enemiesAliveText.text = enemiesLeft.ToString() + " enemies left";
     }
 
 

@@ -46,7 +46,8 @@ public class Projectile : MonoBehaviour
         if (other.gameObject == target)
         {
             EnemyBehaviour behaviourScript = target.GetComponent<EnemyBehaviour>();
-            behaviourScript.damageTaken(damage); //Call function within enemyBehaviour
+            behaviourScript.TakeDamage(damage); //Call function within enemyBehaviour
+
             Destroy(gameObject);
         }
     }
@@ -55,5 +56,26 @@ public class Projectile : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        EnemyBehaviour.OnEnemyKilled += HandleEnemyKilled;
+    }
+
+    private void OnDisable()
+    {
+        EnemyBehaviour.OnEnemyKilled -= HandleEnemyKilled;
+    }
+
+    // broken
+    void HandleEnemyKilled(EnemyBehaviour killedEnemy)
+    {
+        Debug.Log("PROJ KILLED1");
+        if (killedEnemy == target)
+        {
+            Debug.Log("PROJ KILLED2");
+            Destroy(gameObject);
+        }
     }
 }

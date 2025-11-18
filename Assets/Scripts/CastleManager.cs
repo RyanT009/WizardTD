@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class CastleManager : MonoBehaviour
 {
-    [SerializeField] CastleHealthBar healthBar;
-    public Canvas canvas;
+    [SerializeField] HealthBar healthBar;
+
     [SerializeField] float maxHealth;
-    public float currentHealth;
+    [SerializeField] float currentHealth;
+
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
         currentHealth = maxHealth;
     }
 
@@ -20,29 +22,14 @@ public class CastleManager : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    public void TakeDamage(float damage)
     {
-        if(other.tag == "enemy")
-        {
-            Debug.Log(other.tag);
-            damageTaken(20f);
-            Debug.Log("Castle took damage!");
-            Destroy(other.gameObject);
-        }
-        
-    }
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth, maxHealth);
 
-
-    private void damageTaken(float damage)
-    {
-        if (currentHealth - damage <= 0)
+        if (currentHealth <= 0)
         {
             GameOver();
-        }
-        else
-        {
-            currentHealth -= damage;
-            healthBar.setHealth(currentHealth, maxHealth);
         }
     }
 

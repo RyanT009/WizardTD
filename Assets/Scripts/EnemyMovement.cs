@@ -8,6 +8,8 @@ public class EnemyMovement : MonoBehaviour
 {
     public float enemyDistance;
     [SerializeField] float moveSpeed;
+    EnemyBehaviour enemyBehaviourScript;
+
     [SerializeField] GameObject checkpointParent; // Initial GameObject holding all checkpoints needed to copy over into allCheckpoints
     private List<GameObject> allCheckpoints = new List<GameObject>(); // List holding all checkpoints for this enemy's path
     private GameObject nextCheckpoint; // Next checkpoint GameObject to move towards
@@ -20,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyBehaviourScript = GetComponent<EnemyBehaviour>();
+
         currentCheckpointIndex = 0;
         PopulateCheckpoints();   
     }
@@ -29,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
     {
         CalculateDistance();
         
-        if (currentCheckpointIndex < allCheckpoints.Count)
+        if (currentCheckpointIndex < allCheckpoints.Count) // If not at the end of the path
         {
             Vector3 targetPos = nextCheckpoint.transform.position;
             targetPos.y = transform.position.y;
@@ -89,8 +93,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             // Kill the enemy when it hits the fortress
-            //Debug.Log("Last checkpoint reached");
-            Destroy(gameObject);
+            enemyBehaviourScript.Death(true);
         }
     }
 

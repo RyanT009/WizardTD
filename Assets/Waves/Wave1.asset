@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyGroups:
   - enemyPrefab: {fileID: 1258991314359982, guid: 3749b9edee740c44ea7455a4fa1b7382, type: 3}
-    count: 10
+    count: 5
     spawnDelay: 1
   timeBetweenGroups: 0

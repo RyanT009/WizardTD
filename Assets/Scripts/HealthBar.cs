@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
-    public Transform target;
-    public UnityEngine.UI.Image fill;
+    private Transform target;
+    [SerializeField] bool followTarget;
+    [SerializeField] bool isVisible;
+
+    private UnityEngine.UI.Image border;
+    private UnityEngine.UI.Image fill;
     private Vector3 offset;
     private Camera mainCamera;
 
@@ -14,7 +19,14 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        border = GetComponent<Image>();
+        fill = transform.GetChild(0).GetComponent<Image>();
+
+        if (!isVisible)
+        {
+            border.enabled = false;
+            fill.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -22,13 +34,10 @@ public class HealthBar : MonoBehaviour
     {
         if (target != null) //If target is still alive
         {
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position);
-            screenPos.y += offset.y;
-            transform.position = screenPos;
-        }
-        else //When target is removed from game, remove health bar
-        {
-            Destroy(gameObject);
+            if (followTarget)
+            {
+                transform.position = target.position + offset;
+            }
         }
         
     }
@@ -36,12 +45,25 @@ public class HealthBar : MonoBehaviour
     public void Initialize(Transform enemy, Vector3 offsetPos)
     {
         target = enemy;
+        followTarget = true;
         offset = offsetPos;
         mainCamera = Camera.main;
     }
     
-    public void setHealth(float currentHealth, float maxHealth)
+    public void SetHealth(float currentHealth, float maxHealth)
     {
+        isVisible = true;
         fill.fillAmount = currentHealth / maxHealth;
+
+        if (fill.fillAmount < 1f)
+        {
+            border.enabled = true;
+            fill.enabled = true;
+        }
+    }
+
+    public void KillHealthbar()
+    {
+        Destroy(gameObject);
     }
 }
