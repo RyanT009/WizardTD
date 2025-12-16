@@ -16,6 +16,11 @@ public class Plot : MonoBehaviour
 
     public void PlaceTowerHere(GameObject prefab, Vector3 offset)
     {
+        if(!isEmpty)
+        {
+            return;
+        }
+        
         placedTower = Instantiate(prefab, transform.position + offset, Quaternion.identity);
         isEmpty = false;
     }

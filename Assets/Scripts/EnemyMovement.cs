@@ -93,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             // Kill the enemy when it hits the fortress
-            enemyBehaviourScript.Death(true);
+            enemyBehaviourScript.Death("castle");
         }
     }
 

@@ -13,6 +13,12 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] int moneyWorth;
     [SerializeField] int damageToCastle;
 
+    [SerializeField] GameObject fireDeathFX;
+
+    [SerializeField] GameObject teslaDeathFX;
+
+    [SerializeField] GameObject cannonDeathFX;
+
     [SerializeField] HealthBar healthBarPrefab;
     private HealthBar thisHealthBar;
 
@@ -53,7 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, string projectileType)
     {
         Debug.Log("DAMAGE: " + damage);
         currentHealth -= damage;
@@ -61,35 +67,60 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Death(false);
+            Death(projectileType);
         }
     }
     
-    public void Death(bool hitCastle)
+    public void Death(string deathType)
     {
         Debug.Log("death");
 
-        if (!hitCastle) // If player killed the enemy
+        OnEnemyKilled?.Invoke(this); // Trigger kill event for turrets to stop targeting
+        EnemySpawning.instance.RemoveEnemy(gameObject); // Remove from enemy spawner / total enemy count
+        thisHealthBar.KillHealthbar(); // Destroy health bar
+        GetComponent<EnemyMovement>().enabled = false; //Disable movement
+
+        if(deathType == "castle") // If enemy hit the castle
         {
-            gameManager.ChangeMoney(moneyWorth); // Increase money
+            currentHealth = 0;
+            castle.TakeDamage(damageToCastle); // Castle takes damage
+
+            Destroy(gameObject); // Destoy this enemy
+            return;
+        }
+
+        gameManager.ChangeMoney(moneyWorth); // Increase money since enemy has been killed by player
+
+        if(deathType == "fire") // If player killed the enemy
+        {
+            Debug.Log("firedeath");
+            animator.SetBool("Death", true); // Trigger death animation
+            //GameObject particleEffectInstance = Instantiate(fireDeathFX, transform.position, Quaternion.identity); // Instantiate the death particle effect
+            //particleEffectInstance.transform.localScale = gameObject.transform.localScale;
 
             //SpawnGoldCoin(); // Spawns a coin next to the dead enemy
         }
-        else // If enemy hit the castle
+        else if(deathType == "cannon")
         {
-            currentHealth = 0;
-            castle.TakeDamage(damageToCastle);
+            Debug.Log("cannondeath");
+            animator.SetBool("Death", true); // Trigger death animation
+        }
+        else if(deathType == "tesla")
+        {
+            Debug.Log("tesladeath");
+            animator.SetBool("Death", true); // Trigger death animation
         }
 
-        OnEnemyKilled?.Invoke(this); // Trigger kill event for turrets to stop targeting
-        EnemySpawning.instance.RemoveEnemy(gameObject); // Remove from enemy spawner / total enemy count
 
-        thisHealthBar.KillHealthbar(); // Destroy health bar
-
-        GetComponent<EnemyMovement>().enabled = false; //Disable movement
-        animator.SetBool("Death", true); // Trigger death animation
+        //DeathAnimation();
+        
 
         StartSink(); // Animate model to sink through floor
+    }
+
+    void DeathAnimation()
+    {
+        
     }
 
     /*

@@ -584,6 +584,9 @@ MonoBehaviour:
   currentHealth: 0
   moneyWorth: 50
   damageToCastle: 10
+  fireDeathFX: {fileID: 3487143776849925414, guid: b308436526e87b14baf630d13a6668ce, type: 3}
+  teslaDeathFX: {fileID: 0}
+  cannonDeathFX: {fileID: 0}
   healthBarPrefab: {fileID: 6916663210486006858, guid: 91d83bc9fe8965f40b1d0e313c2cf931, type: 3}
   castle: {fileID: 0}
   gameManager: {fileID: 0}

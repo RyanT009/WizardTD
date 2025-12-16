@@ -56,6 +56,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 9008104994290993935, guid: 39378e2199a4d2046a5d1e3eef997fe2, type: 3}
   projectileSpawnOffset: {x: 0, y: 6.8, z: 0}
   currentTarget: {fileID: 0}
+  turretType: fire
   enemiesInRange: []
 --- !u!135 &3688788433374708598
 SphereCollider:

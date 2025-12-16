@@ -17,6 +17,8 @@ public class TurretTargeting : MonoBehaviour
 
     [SerializeField] GameObject currentTarget;
 
+    [SerializeField] string turretType = null;
+
     private SphereCollider targetingField;
     [SerializeField] List<GameObject> enemiesInRange;
     private TurretRotation rotationScript;
@@ -154,6 +156,7 @@ public class TurretTargeting : MonoBehaviour
 
         // Pass target and damage
         Projectile projScript = projectile.GetComponent<Projectile>();
+        projScript.SetType(turretType);
         projScript.SetTarget(currentTarget);
         projScript.PassDamage(damage);
     }
