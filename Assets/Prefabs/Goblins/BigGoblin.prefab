@@ -667,7 +667,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5612894468782980774}
@@ -774,7 +774,11 @@ MonoBehaviour:
   currentHealth: 0
   moneyWorth: 100
   damageToCastle: 15
+  fireDeathFX: {fileID: 0}
+  teslaDeathFX: {fileID: 0}
+  cannonDeathFX: {fileID: 0}
   healthBarPrefab: {fileID: 6916663210486006858, guid: 91d83bc9fe8965f40b1d0e313c2cf931, type: 3}
+  healthBarPosition: {x: 0, y: 14, z: 0}
   castle: {fileID: 0}
   gameManager: {fileID: 0}
   animator: {fileID: 4190874043919179926}

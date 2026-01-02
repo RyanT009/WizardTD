@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         currencyText.text = "$" + currency;
 
         uiManager.UpdateShopUI(currency);
+        uiManager.RefreshTowerPanel();
     }
 
     public int GetCurrency()

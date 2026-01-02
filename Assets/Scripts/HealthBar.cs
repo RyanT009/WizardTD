@@ -48,6 +48,7 @@ public class HealthBar : MonoBehaviour
         followTarget = true;
         offset = offsetPos;
         mainCamera = Camera.main;
+        transform.localRotation = Quaternion.identity;
     }
     
     public void SetHealth(float currentHealth, float maxHealth)

@@ -11,6 +11,9 @@ public class TurretTargeting : MonoBehaviour
     [SerializeField] float damage;
     private float shootTimer;
 
+    [SerializeField] int type; //0 = mage, 1 = cannon, 2 = tesla
+    [SerializeField] int level;
+
 
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Vector3 projectileSpawnOffset;
@@ -22,13 +25,22 @@ public class TurretTargeting : MonoBehaviour
     private SphereCollider targetingField;
     [SerializeField] List<GameObject> enemiesInRange;
     private TurretRotation rotationScript;
+
+    [SerializeField] UpgradeManager upgradeManager;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        targetingField = GetComponent<SphereCollider>();
+        upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
 
+        level = 1;
+
+        damage = upgradeManager.getTowerStats()[type][level - 1][0];
+        shootTime = 1f / upgradeManager.getTowerStats()[type][level - 1][1];
+        range = upgradeManager.getTowerStats()[type][level - 1][2];
+
+        targetingField = GetComponent<SphereCollider>();
         targetingField.radius = range;
 
         rotationScript = GetComponent<TurretRotation>();
@@ -45,6 +57,22 @@ public class TurretTargeting : MonoBehaviour
             shootTimer = shootTime;
             Shoot();
         }
+    }
+
+    public void UpgradeTower(Vector3 newStats)
+    {
+        damage = newStats.x;
+        shootTime = 1f / newStats.y;
+        range = newStats.z;
+
+        GetComponent<SphereCollider>().radius = range;
+
+        level++;
+    }
+
+    public Vector2Int GetTypeAndLevel()
+    {
+        return new Vector2Int(type, level);
     }
 
     public GameObject GetTarget()

@@ -21,6 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] HealthBar healthBarPrefab;
     private HealthBar thisHealthBar;
+    [SerializeField] Vector3 healthBarPosition;
 
     [SerializeField] CastleManager castle;
     [SerializeField] GameManager gameManager;
@@ -45,8 +46,8 @@ public class EnemyBehaviour : MonoBehaviour
         GameObject worldCanvas = GameObject.FindGameObjectWithTag("worldCanvas");
 
         thisHealthBar = Instantiate(healthBarPrefab, worldCanvas.transform);
-        thisHealthBar.Initialize(transform, new Vector3(0f, 20f, -4f));
-        thisHealthBar.transform.localScale *= 0.4f;
+        thisHealthBar.Initialize(transform, new Vector3(healthBarPosition.x, healthBarPosition.y, healthBarPosition.z));
+        thisHealthBar.transform.localScale *= 0.5f;
 
         gameManager = FindFirstObjectByType<GameManager>();
         castle = FindFirstObjectByType<CastleManager>();

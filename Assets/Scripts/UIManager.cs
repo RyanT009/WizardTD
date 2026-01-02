@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -36,6 +37,31 @@ public class UIManager : MonoBehaviour
 
     private Ray debugRay;
 
+    // PANELS
+    [SerializeField] GameManager gameManager;
+    [SerializeField] UpgradeManager upgradeManager;
+
+    [SerializeField] int currentPlotSelected;
+    [SerializeField] GameObject rangePrefab;
+    [SerializeField] GameObject currentPlotRange;
+
+    [SerializeField] GameObject buyPanel;
+    [SerializeField] GameObject towerPanel;
+
+    [SerializeField] TextMeshProUGUI plotNumber;
+    [SerializeField] GameObject plotTowerIcon;
+    [SerializeField] TextMeshProUGUI plotTowerName;
+    [SerializeField] TextMeshProUGUI plotTowerLevel;
+
+    [SerializeField] List<TextMeshProUGUI> plotTowerStats;
+    [SerializeField] List<TextMeshProUGUI> plotTowerNextStats;
+
+    [SerializeField] Button upgradeButton;
+    [SerializeField] Button sellButton;
+
+    [SerializeField] TextMeshProUGUI plotTowerDescription;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,11 +76,26 @@ public class UIManager : MonoBehaviour
         {
             MoveGhostWithMouse();
 
-            if (snappedPlot != null && Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                PlaceTower();
+                if (snappedPlot != null)
+                {
+                    PlaceTower();
+                }
+                else
+                {
+                    CancelPlaceTower();
+                }
             }
         }
+
+        /*
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.Log("HOVERING OVER : " + hit.collider.gameObject);
+        }
+        */
     }
 
    void SpawnGhost(GameObject ghostPrefab)
@@ -175,7 +216,9 @@ public class UIManager : MonoBehaviour
         {
             GameObject button = Instantiate(plotButtonPrefab, plotButtonParent.transform);
             button.transform.position = Camera.main.WorldToScreenPoint(child.position);
-            button.SetActive(false);
+
+            button.GetComponent<Button>().onClick.AddListener(() => SelectAPlot());
+            //button.SetActive(false);
         }
     }
 
@@ -215,9 +258,223 @@ public class UIManager : MonoBehaviour
         Vector3 offset = new Vector3(0, ghostOffsets[currentGhostIndex] + hoverHeight, 0);
         snappedPlot.GetComponent<Plot>().PlaceTowerHere(towerPrefabs[currentGhostIndex], offset);
 
+        gameManager.ChangeMoney(-towerPrices[currentGhostIndex]);
+
         snappedPlot = null;
         currentGhostIndex = -1;
         Destroy(currentGhost);
 
+    }
+
+    void CancelPlaceTower()
+    {
+        snappedPlot = null;
+        currentGhostIndex = -1;
+        Destroy(currentGhost);
+
+    }
+
+    public void SelectAPlot()
+    {
+        if (currentGhost == null)
+        {
+            Debug.Log("PLOT HAS BEEN SELECTED");
+            // Get the button GameObject that was clicked
+            GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+
+            if (clickedButton == null)
+            {
+                Debug.LogWarning("No button detected!");
+                return;
+            }
+
+            // Make sure the button is actually a child of plotButtonParent
+            if (clickedButton.transform.parent != plotButtonParent.transform)
+            {
+                Debug.LogWarning("Clicked button is not under plotButtonParent!");
+                return;
+            }
+
+            // Get the index of the clicked button among its siblings
+            int buttonIndex = clickedButton.transform.GetSiblingIndex();
+
+            GameObject plot = plotParent.transform.GetChild(buttonIndex).gameObject;
+            plot.GetComponent<Plot>().SelectThisPlot();
+        }
+
+    }
+
+    void GenerateRange()
+    {
+        if (currentPlotRange != null)
+        {
+            Destroy(currentPlotRange);
+        }
+
+        GameObject plot = plotParent.transform.GetChild(currentPlotSelected).gameObject;
+
+        currentPlotRange = Instantiate(rangePrefab, plot.GetComponent<Plot>().GetTower().transform.position, Quaternion.identity);
+        Vector2Int currentTowerTypeAndLevel = plot.GetComponent<Plot>().GetTower().GetComponent<TurretTargeting>().GetTypeAndLevel();
+
+        float currentTowerRange = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1][2];
+
+        float scaleMultiplier = plot.GetComponent<Plot>().GetTower().transform.localScale.x * 2f;
+        currentPlotRange.transform.localScale = new Vector3(currentTowerRange, currentTowerRange, currentTowerRange) * scaleMultiplier;
+    }
+
+    public void SetPlotSelected(int index)
+    {
+        currentPlotSelected = index;
+    }
+
+    public void ShowTowerPanel()
+    {
+        GenerateRange();
+
+        buyPanel.SetActive(false);
+        towerPanel.SetActive(true);
+    }
+
+    public void ShowBuyPanel()
+    {
+        Debug.Log("CALLED");
+        Destroy(currentPlotRange);
+
+        buyPanel.SetActive(true);
+        towerPanel.SetActive(false);
+    }
+
+    public void RefreshTowerPanel()
+    {
+        if (plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower() != null)
+        {
+            Vector2Int towerTypeAndLevel = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower().GetComponent<TurretTargeting>().GetTypeAndLevel();
+            UpdateTowerPanel(towerTypeAndLevel.x, towerTypeAndLevel.y);
+        }
+            
+    }
+
+
+    public void UpdateTowerPanel(int towerType, int towerLevel)
+    {
+        // Tower types
+        // 0 = mage
+        // 1 = cannon
+        // 2 = tesla
+        //
+        // Levels are given as 1 2 3
+        // Upgrades[0] = 1>2, Upgrades[1] = 2>3
+
+        plotTowerIcon.GetComponent<Image>().sprite = upgradeManager.getTowerIcons()[towerType];
+        plotNumber.text = "Plot " + currentPlotSelected;
+        plotTowerName.text = upgradeManager.getTowerNames()[towerType];
+        plotTowerLevel.text = "Level " + towerLevel;
+
+        Debug.Log("LEVEL :  " + towerLevel);
+        Debug.Log("TYPE :  " + towerType);
+
+        // Current damage, rate, range
+        plotTowerStats[0].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][0].ToString();
+        plotTowerStats[1].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][1].ToString();
+        plotTowerStats[2].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][2].ToString();
+
+        // Next damage, rate, range
+        if (towerLevel >= 3)
+        {
+            plotTowerNextStats[0].text = "MAX";
+            plotTowerNextStats[1].text = "MAX";
+            plotTowerNextStats[2].text = "MAX";
+
+            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: MAX";
+
+        }
+        else
+        {
+            plotTowerNextStats[0].text = upgradeManager.getTowerStats()[towerType][towerLevel][0].ToString();
+            plotTowerNextStats[1].text = upgradeManager.getTowerStats()[towerType][towerLevel][1].ToString();
+            plotTowerNextStats[2].text = upgradeManager.getTowerStats()[towerType][towerLevel][2].ToString();
+
+            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: $" + upgradeManager.getTowerUpgradePrices()[towerType][towerLevel - 1];
+        }
+
+        sellButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sell: $" + upgradeManager.getTowerSellPrices()[towerType][towerLevel - 1];
+        plotTowerDescription.text = upgradeManager.getTowerDescriptions()[towerType];
+
+
+        GameObject currentTower = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower();
+
+        int money = gameManager.GetCurrency();
+        Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
+
+
+        if (currentTowerTypeAndLevel.y >= 3)
+        {
+            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.grey;
+        }
+        else
+        {
+            int upgradeCost = upgradeManager.getTowerUpgradePrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1];
+
+            if (money >= upgradeCost)
+            {
+                upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.green;
+            }
+            else
+            {
+                upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
+            }
+        }
+
+
+    }
+
+    public void UpgradeTower()
+    {
+        GameObject currentTower = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower();
+
+        int money = gameManager.GetCurrency();
+        Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
+
+        if (currentTowerTypeAndLevel.y >= 3)
+        {
+            return;
+        }
+
+        int upgradeCost = upgradeManager.getTowerUpgradePrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1];
+
+
+
+        if (money >= upgradeCost)
+        {
+            // Upgrade tower
+            gameManager.ChangeMoney(-upgradeCost);
+            Vector3 newStats = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y];
+
+            currentTower.GetComponent<TurretTargeting>().UpgradeTower(newStats);
+
+            UpdateTowerPanel(currentTowerTypeAndLevel.x, currentTowerTypeAndLevel.y + 1);
+            GenerateRange();
+
+        }
+        else
+        {
+            // Do nothing
+            return;
+        }
+    }
+
+    public void SellTower()
+    {
+        Plot currentPlot = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>();
+        GameObject currentTower = currentPlot.GetTower();
+
+        Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
+        gameManager.ChangeMoney(upgradeManager.getTowerSellPrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1]);
+
+        ShowBuyPanel();
+
+        currentPlot.RemoveTower();
+
+        Destroy(currentPlotRange);
     }
 }
