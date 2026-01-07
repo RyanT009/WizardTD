@@ -11,12 +11,35 @@ public class Projectile : MonoBehaviour
     private string projectileType = null;
 
     [SerializeField] ParticleSystem impactFX;
+
+    [SerializeField] ParticleSystem teslaShootFX;
+
     private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        
+
+        if(projectileType == "tesla")
+        {
+            //Get direction of target
+            Vector3 direction = (target.transform.position - transform.position).normalized;
+            //Get rotation facing target
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            //Instantiate particle system to aim at target
+            ParticleSystem teslaFX = Instantiate(teslaShootFX, transform.position, rotation);
+
+            float distance = (target.transform.position - transform.position).magnitude;
+
+            var shape = teslaFX.shape;
+
+            shape.length = distance;
+
+            teslaFX.Play();
+        }
     }
 
     void FixedUpdate()
@@ -25,6 +48,7 @@ public class Projectile : MonoBehaviour
         if (target.GetComponent<EnemyBehaviour>().AliveCheck() == true)
         {
             Vector3 direction = (target.transform.position - transform.position).normalized;
+            //transform.forward = direction;
             rb.velocity = direction * movementSpeed;
         }
         else // If enemy is destroyed for whatever reason
@@ -57,9 +81,11 @@ public class Projectile : MonoBehaviour
             ImpactFX();
 
             EnemyBehaviour behaviourScript = target.GetComponent<EnemyBehaviour>();
-            behaviourScript.TakeDamage(damage, projectileType); //Call function within enemyBehaviour
+            behaviourScript.TakeDamage(damage, projectileType); //Call function within enemyBehaviour 
 
             Destroy(gameObject);
+            
+            
         }
     }
 

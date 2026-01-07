@@ -24504,7 +24504,7 @@ MonoBehaviour:
   towerUpgradePrices2: fa000000f4010000
   towerSellPrices2: 64000000c8000000c2010000
   towerStats3:
-  - {x: 2, y: 6, z: 14}
+  - {x: 10, y: 1, z: 14}
   - {x: 2.5, y: 7, z: 16}
   - {x: 3, y: 9, z: 18}
   towerUpgradePrices3: 2c010000f4010000
@@ -30532,6 +30532,7 @@ GameObject:
   - component: {fileID: 585082699}
   - component: {fileID: 585082698}
   - component: {fileID: 585082697}
+  - component: {fileID: 585082701}
   m_Layer: 0
   m_Name: Terrain (1)
   m_TagString: Untagged
@@ -30636,6 +30637,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &585082701
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585082696}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb896a49ce79c3341baae9c708134291, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &588693341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80236,6 +80259,7 @@ SceneRoots:
   - {fileID: 582752965}
   - {fileID: 603804782}
   - {fileID: 705507995}
+  - {fileID: 476828376}
   - {fileID: 2018873022}
   - {fileID: 1061093363}
   - {fileID: 2004408256}
@@ -80251,7 +80275,6 @@ SceneRoots:
   - {fileID: 585082700}
   - {fileID: 320883430}
   - {fileID: 298399269}
-  - {fileID: 476828376}
   - {fileID: 2040519410}
   - {fileID: 1879489116}
   - {fileID: 2133225643}

@@ -53,7 +53,7 @@ MonoBehaviour:
   damage: 0
   type: 2
   level: 1
-  projectilePrefab: {fileID: 9008104994290993935, guid: c2ad7d7d77df18145bde2278454e399c, type: 3}
+  projectilePrefab: {fileID: 9008104994290993935, guid: 5ed5b69b53d9a2c4a975c1f11973a1dd, type: 3}
   projectileSpawnOffset: {x: 0, y: 15, z: 0}
   currentTarget: {fileID: 0}
   turretType: tesla
