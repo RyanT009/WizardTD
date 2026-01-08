@@ -220,7 +220,10 @@ public class TurretTargeting : MonoBehaviour
             if (child.GetSiblingIndex() == index)
             {
                 child.gameObject.SetActive(true);
-                rotationScript.ChangeObjectToRotate(child.GetChild(child.childCount - 1).gameObject);
+                if (type == 2)
+                {
+                    rotationScript.ChangeObjectToRotate(child.GetChild(child.childCount - 1).gameObject);
+                }
             }
             else
             {

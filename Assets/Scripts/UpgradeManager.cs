@@ -13,6 +13,15 @@ public class UpgradeManager : MonoBehaviour
 
     private List<List<TowerUpgrade>> allUpgradeLists = new List<List<TowerUpgrade>>();
 
+
+    public float enemyHealthMultiplier; // How much health enemy spawns with (1 = 100%)
+    public float damageMultiplier; // How much damage each projectile does (1 = 100%)
+    public float speedMultiplier; // How fast towers shoot (1 = 100%)
+
+    public float goldMultiplier; // How much money enemies drop (1 = 100%)
+    public float priceMultiplier; // How much towers/upgrades cost (1 = 100%)
+
+
     void Awake()
     {
         allUpgradeLists.Add(upgradeList1);
@@ -33,6 +42,33 @@ public class UpgradeManager : MonoBehaviour
         }
         return allUpgradeLists[index];
     }
+
+    public void ChangeEnemyHealthMultiplier(float newValue)
+    {
+        enemyHealthMultiplier = newValue;
+    }
+
+    public void ChangeDamageMultiplier(float newValue)
+    {
+        damageMultiplier = newValue;
+    }
+
+    public void ChangeSpeedMultiplier(float newValue)
+    {
+        speedMultiplier = newValue;
+    }
+
+    public void ChangeGoldMultiplier(float newValue)
+    {
+        goldMultiplier = newValue;
+    }
+
+    public void ChangePriceMultiplier(float newValue)
+    {
+        priceMultiplier = newValue;
+    }
+
+
 
 
 }

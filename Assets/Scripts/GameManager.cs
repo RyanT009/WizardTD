@@ -6,7 +6,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] int currency;
+    [SerializeField] int skillPoints;
     [SerializeField] TextMeshProUGUI currencyText;
+    [SerializeField] TextMeshProUGUI skillPointsText;
 
     [SerializeField] UIManager uiManager;
 
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currencyText.text = "$" + currency;
+        skillPointsText.text = "Skill PTS: " + skillPoints;
         uiManager.UpdateShopUI(currency);
     }
 
@@ -33,8 +36,20 @@ public class GameManager : MonoBehaviour
         uiManager.RefreshTowerPanel();
     }
 
+    public void ChangeSkillPoints(int amount)
+    {
+        skillPoints += amount;
+        skillPointsText.text = "Skill PTS: " + skillPoints;
+        uiManager.RefreshSkillTree();
+    }
+
     public int GetCurrency()
     {
         return currency;
+    }
+
+    public int GetSkillPoints()
+    {
+        return skillPoints;
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4203744955743118882}
+  - {fileID: 7800700958908194502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3171614830834709712
@@ -84,13 +84,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeslaTowerLVL1
       objectReference: {fileID: 0}
+    - target: {fileID: 4630402812843846166, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630402812843846166, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630402812843846166, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
---- !u!4 &4203744955743118882 stripped
+--- !u!4 &7800700958908194502 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1609303637235585778, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4630402812843846166, guid: f7adfc9bd64dc2d48a463b3aa46e9685, type: 3}
   m_PrefabInstance: {fileID: 3171614830834709712}
   m_PrefabAsset: {fileID: 0}

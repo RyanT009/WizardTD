@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject rangePrefab;
     [SerializeField] GameObject currentPlotRange;
 
+    [SerializeField] GameObject unpausedMenuParent;
     [SerializeField] GameObject buyPanel;
     [SerializeField] GameObject towerPanel;
 
@@ -70,6 +71,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI specUpgradeDesc2;
     [SerializeField] Button specUpgradeButton2;
 
+    // Skill Tree
+    [SerializeField] GameObject skillTreeMenu;
+    [SerializeField] bool isTreeOpen;
+    [SerializeField] List<int> skillsActivated = new List<int>();
+    [SerializeField] List<Button> skillButtons = new List<Button>();
+    [SerializeField] GameObject skillButtonsParent;
+
+    [SerializeField] TextMeshProUGUI skillPointsText;
+
+
+
+    // Settings
+    [SerializeField] Button pauseButton;
+    [SerializeField] Button speedButton;
+
+    [SerializeField] bool isPaused;
+    [SerializeField] int currentSpeedIndex;
+
+    [SerializeField] GameObject pauseMenu;
+
+
 
 
     // Start is called before the first frame update
@@ -77,40 +99,16 @@ public class UIManager : MonoBehaviour
     {
         CreatePlotButtons();
         SetTowerPrices();
+
+        foreach (Transform child in skillButtonsParent.transform)
+        {
+            skillButtons.Add(child.gameObject.GetComponent<Button>());
+        }
     }
 
     void Update()
     {
-        // Keyboard Shortcuts for accessibility
-        if (currentGhost == null){  // prevents switching mid-placement
-            
-            // 1 -> Archer Tower
-            if (Input.GetKeyDown(KeyCode.Alpha1)){
-                towerButtons[0].onClick.Invoke();
-            }
-
-            // 2 -> Fire Tower
-            if (Input.GetKeyDown(KeyCode.Alpha2)){
-                towerButtons[1].onClick.Invoke();
-            }
-
-            // 3 -> Cannon Tower
-            if (Input.GetKeyDown(KeyCode.Alpha3)){
-                towerButtons[2].onClick.Invoke();
-            }
-
-            // 4 -> Tesla Tower
-            if (Input.GetKeyDown(KeyCode.Alpha4)){
-                towerButtons[3].onClick.Invoke();
-            }
-
-            // 5 -> Mage Tower
-            if (Input.GetKeyDown(KeyCode.Alpha5)){
-                towerButtons[4].onClick.Invoke();
-            }
-        }
-
-            if (currentGhost != null)
+        if (currentGhost != null)
         {
             MoveGhostWithMouse();
 
@@ -125,6 +123,67 @@ public class UIManager : MonoBehaviour
                     CancelPlaceTower();
                 }
             }
+        }
+        else // Hotkeys
+        {
+            if (!isPaused)
+            {
+                // 1 -> Archer Tower
+                if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+                {
+                    towerButtons[0].onClick.Invoke();
+                }
+
+                // 2 -> Fire Tower
+                if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    towerButtons[1].onClick.Invoke();
+                }
+
+                // 3 -> Cannon Tower
+                if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+                {
+                    towerButtons[2].onClick.Invoke();
+                }
+
+                // 4 -> Tesla Tower
+                if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+                {
+                    towerButtons[3].onClick.Invoke();
+                }
+
+                // 5 -> Mage Tower
+                if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+                {
+                    towerButtons[4].onClick.Invoke();
+                }
+
+                // O -> Trigger Speed Change
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    TriggerSpeedChange();
+                }
+            }
+
+            // P -> Trigger Pause
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TriggerPause();
+            }
+
+            // S -> Open Skill Tree
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (isPaused && !isTreeOpen)
+                {
+                    
+                }
+                else
+                {
+                    TriggerSkillTree();
+                }
+            }
+
         }
 
         /*
@@ -319,7 +378,7 @@ public class UIManager : MonoBehaviour
 
     public void SelectAPlot()
     {
-        if (currentGhost == null)
+        if (currentGhost == null && !isPaused)
         {
             Debug.Log("PLOT HAS BEEN SELECTED");
             // Get the button GameObject that was clicked
@@ -579,5 +638,232 @@ public class UIManager : MonoBehaviour
 
         Destroy(currentPlotRange);
     }
-    
+
+    public void TriggerPause()
+    {
+        if (isPaused)
+        {
+            if (!isTreeOpen)
+            {
+                UnpauseGame();
+            }
+            else //if paused by skill tree, close it, then real pause
+            {
+                TriggerSkillTree();
+                PauseGame();
+            }
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    public void TriggerSpeedChange()
+    {
+        ChangeSpeed();
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+        isPaused = true;
+
+        pauseMenu.SetActive(true);
+        pauseButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "|>";
+
+        unpausedMenuParent.SetActive(false);
+        skillTreeMenu.SetActive(false);
+
+    }
+    void UnpauseGame()
+    {
+        Time.timeScale = GetSpeed();
+        isPaused = false;
+
+        pauseMenu.SetActive(false);
+        pauseButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "||";
+
+        unpausedMenuParent.SetActive(true);
+        skillTreeMenu.SetActive(false);
+    }
+
+    void ChangeSpeed()
+    {
+        if (currentSpeedIndex < 2)
+        {
+            currentSpeedIndex++;
+        }
+        else
+        {
+            currentSpeedIndex = 0;
+        }
+
+        speedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GetSpeed() + "x";
+
+        Time.timeScale = GetSpeed();
+    }
+
+    float GetSpeed()
+    {
+        if (currentSpeedIndex == 0)
+        {
+            return 0.5f;
+        }
+        else if (currentSpeedIndex == 1)
+        {
+            return 1f;
+        }
+        else
+        {
+            return 2f;
+        }
+    }
+
+    public void TriggerSkillTree()
+    {
+        if (!isTreeOpen)
+        {
+            Time.timeScale = 0;
+            isTreeOpen = true;
+            isPaused = true;
+
+            unpausedMenuParent.SetActive(false);
+            skillTreeMenu.SetActive(true);
+            RefreshSkillTree();
+        }
+        else
+        {
+            Time.timeScale = GetSpeed();
+            isTreeOpen = false;
+            isPaused = false;
+
+            unpausedMenuParent.SetActive(true);
+            skillTreeMenu.SetActive(false);
+        }
+    }
+
+    public void ActivateSkill(int skillIndex)
+    {
+        if (skillIndex == 0)
+        {
+            upgradeManager.ChangeSpeedMultiplier(1.1f);
+        }
+        else if (skillIndex == 1)
+        {
+            upgradeManager.ChangeEnemyHealthMultiplier(0.95f);
+        }
+        else if (skillIndex == 2)
+        {
+            upgradeManager.ChangeEnemyHealthMultiplier(0.9f);
+        }
+        else if (skillIndex == 3)
+        {
+            upgradeManager.ChangeEnemyHealthMultiplier(0.85f);
+        }
+        else if (skillIndex == 4)
+        {
+            upgradeManager.ChangeGoldMultiplier(1.1f);
+        }
+        else if (skillIndex == 5)
+        {
+            upgradeManager.ChangeGoldMultiplier(1.25f);
+        }
+        else if (skillIndex == 6)
+        {
+            upgradeManager.ChangePriceMultiplier(0.9f);
+        }
+        else if (skillIndex == 7)
+        {
+            upgradeManager.ChangeGoldMultiplier(1.4f);
+        }
+        else if (skillIndex == 8)
+        {
+            upgradeManager.ChangeSpeedMultiplier(1.1f);
+        }
+        else if (skillIndex == 9)
+        {
+            upgradeManager.ChangeDamageMultiplier(1.1f);
+        }
+        else if (skillIndex == 10)
+        {
+            upgradeManager.ChangeDamageMultiplier(1.15f);
+            upgradeManager.ChangeSpeedMultiplier(1.25f);
+        }
+
+        gameManager.ChangeSkillPoints(-1);
+
+        skillsActivated.Add(skillIndex);
+        skillButtons[skillIndex].transform.GetChild(1).gameObject.SetActive(true);
+
+        RefreshSkillTree();
+
+    }
+
+    public void RefreshSkillTree()
+    {
+        skillPointsText.text = "Points Available: " + gameManager.GetSkillPoints();
+
+        // Disable all buttons first
+        foreach (Button button in skillButtons)
+        {
+            button.interactable = false;
+        }
+
+        if (gameManager.GetSkillPoints() == 0)
+        {
+            ; // Don't enable any
+        }
+        else
+        {
+            if (!skillsActivated.Contains(0))
+            {
+                // Activate first button
+                skillButtons[0].interactable = true;
+            }
+            if (skillsActivated.Contains(0))
+            {
+                skillButtons[1].interactable = true;
+                skillButtons[4].interactable = true;
+                skillButtons[8].interactable = true;
+            }
+            if (skillsActivated.Contains(1))
+            {
+                skillButtons[2].interactable = true;
+            }
+            if (skillsActivated.Contains(2))
+            {
+                skillButtons[3].interactable = true;
+            }
+
+            if (skillsActivated.Contains(4))
+            {
+                skillButtons[5].interactable = true;
+            }
+            if (skillsActivated.Contains(5))
+            {
+                skillButtons[6].interactable = true;
+                skillButtons[7].interactable = true;
+            }
+
+            if (skillsActivated.Contains(8))
+            {
+                skillButtons[9].interactable = true;
+            }
+            if (skillsActivated.Contains(9))
+            {
+                skillButtons[10].interactable = true;
+            }
+
+            // disable skills already activated
+            for (int i = 0; i <  skillButtons.Count; i++)
+            {
+                if (skillsActivated.Contains(i))
+                {
+                    skillButtons[i].interactable = false;
+                }
+            }
+        }
+    }
+
 }
