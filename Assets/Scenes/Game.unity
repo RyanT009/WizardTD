@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -54240,6 +54240,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 21859614562804048, guid: 8035fbfe93d5a4b46a6ffe164386ae79, type: 3}
   m_PrefabInstance: {fileID: 887835806}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &891888856
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.68
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7179409
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.69610405
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -88.231
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
+      propertyPath: m_Name
+      value: TeslaTowerLVL4a
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 957e11710352a0741b5a3af496dc99f0, type: 3}
 --- !u!4 &904570465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8cc8c26969aff6944bebbd7432a04e79, type: 3}
@@ -59374,6 +59443,107 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7e73a1cb2bb563442acc6a926a955228, type: 3}
   m_PrefabInstance: {fileID: 1256443113}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1271995928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.3184676
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3999977
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.434837
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6666548
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7453667
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -96.381
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0153088365
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.8145385
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0041418
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99991304
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0000000032596286
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.013188912
+      objectReference: {fileID: 0}
+    - target: {fileID: -7151571834721402023, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 1.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
+      propertyPath: m_Name
+      value: TeslaTowerLVL4B
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65a065dd5afdc7649878a157e64041af, type: 3}
 --- !u!1 &1274160452
 GameObject:
   m_ObjectHideFlags: 0
@@ -80808,6 +80978,120 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 71, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &6154983714968588244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.268788
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.40000057
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.91136
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400052482417387313, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064702396932832651, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+      propertyPath: m_Name
+      value: TeslaTowerLVL3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79b7b68bdae503742af20d8583e20e3e, type: 3}
+--- !u!1001 &6941982493323302515
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -48.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596032485122205110, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120614583164026636, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
+      propertyPath: m_Name
+      value: TeslaTowerLVL1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0d09ad52c67ace40a7a103bc0be22e4, type: 3}
 --- !u!224 &7044938213531962402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -80828,6 +81112,63 @@ RectTransform:
   m_AnchoredPosition: {x: -6.1, y: -0.6}
   m_SizeDelta: {x: 75, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &7316682559388609634
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -27.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284592856521343487, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916311092158913349, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
+      propertyPath: m_Name
+      value: TeslaTowerLVL2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3d9101606eb5dc142a80332f032e8135, type: 3}
 --- !u!114 &7864726465545039799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80952,3 +81293,8 @@ SceneRoots:
   - {fileID: 1879489116}
   - {fileID: 977468839}
   - {fileID: 651398176}
+  - {fileID: 7316682559388609634}
+  - {fileID: 6941982493323302515}
+  - {fileID: 6154983714968588244}
+  - {fileID: 891888856}
+  - {fileID: 1271995928}

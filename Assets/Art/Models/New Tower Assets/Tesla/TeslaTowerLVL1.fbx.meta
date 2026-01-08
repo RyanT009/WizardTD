@@ -3,7 +3,22 @@ guid: 339fdf6e800ac8f4989a58cc8cacbee9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Slabs_05_1k
+    second: {fileID: 2100000, guid: f1759d2925a6f994097ded6328008d46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_01
+    second: {fileID: 2100000, guid: f0325ce31eea7d241940fc3c73b6fc6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Plates_01
+    second: {fileID: 2100000, guid: b4e0fb410c319354d95ffb2b3454b603, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

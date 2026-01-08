@@ -3,7 +3,32 @@ guid: 65a065dd5afdc7649878a157e64041af
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElectroTower_DestroyedStone
+    second: {fileID: 2100000, guid: 7d123e33730691a4283ca5fb32a36f7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_01
+    second: {fileID: 2100000, guid: 62a9a33cda5fd94469b064a1ba30a02f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_02
+    second: {fileID: 2100000, guid: c1a3610ed8636c947b70f6b48756cb9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WizardBlue
+    second: {fileID: 2100000, guid: 0d68a27cda0db144692fea0bb509a745, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_06
+    second: {fileID: 2100000, guid: 5f33e581e4368b64e91f9e6f1e1524db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
