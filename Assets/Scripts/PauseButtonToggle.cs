@@ -13,6 +13,14 @@ public class PauseButton : MonoBehaviour{
         image = GetComponent<Image>();
     }
 
+    void Update(){
+        // P -> pause / unpause
+        if (Input.GetKeyDown(KeyCode.P)){
+            TogglePause();
+        }
+    }
+
+
     public void TogglePause(){
        // Debug.Log("AAAA");
         if (Time.timeScale == 0f){

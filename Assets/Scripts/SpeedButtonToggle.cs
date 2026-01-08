@@ -18,6 +18,14 @@ public class SpeedButton : MonoBehaviour{
         image.sprite = normalIcon;
     }
 
+    void Update(){
+        // S -> change game speed
+        if (Input.GetKeyDown(KeyCode.S)){
+            ChangeSpeed();
+        }
+    }
+
+
     public void ChangeSpeed(){
 
         speed = speed + 1;

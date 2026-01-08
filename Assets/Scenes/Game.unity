@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -75427,8 +75427,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757128165}
-  - component: {fileID: 1757128166}
-  - component: {fileID: 1757128167}
   m_Layer: 5
   m_Name: GameSpeedController
   m_TagString: Untagged
@@ -75457,37 +75455,6 @@ RectTransform:
   m_AnchoredPosition: {x: 808.00006, y: -13.999981}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1757128166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757128164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d84616e63e668347841c0c59118ea24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseIcon: {fileID: 21300000, guid: e12d90bfd0a21fd449cf9ae5efd069b9, type: 3}
-  playIcon: {fileID: 21300000, guid: 5573a585f093c7c42bc710038776b7d3, type: 3}
-  lastSpeed: 1
---- !u!114 &1757128167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757128164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2799629ff77a54ea79e6df037f36cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  halfIcon: {fileID: 21300000, guid: 7b1e34b6f9c5b834da9bdc50ab78d24b, type: 3}
-  normalIcon: {fileID: 21300000, guid: 79aa4dbd472ec6f4d853aad6b35219e9, type: 3}
-  doubleIcon: {fileID: 21300000, guid: dd87342715a33484fa13a3f5b3eb8456, type: 3}
-  pauseButton: {fileID: 473075759}
 --- !u!1 &1770032511
 GameObject:
   m_ObjectHideFlags: 0

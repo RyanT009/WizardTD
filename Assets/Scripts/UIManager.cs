@@ -81,7 +81,36 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (currentGhost != null)
+        // Keyboard Shortcuts for accessibility
+        if (currentGhost == null){  // prevents switching mid-placement
+            
+            // 1 -> Archer Tower
+            if (Input.GetKeyDown(KeyCode.Alpha1)){
+                towerButtons[0].onClick.Invoke();
+            }
+
+            // 2 -> Fire Tower
+            if (Input.GetKeyDown(KeyCode.Alpha2)){
+                towerButtons[1].onClick.Invoke();
+            }
+
+            // 3 -> Cannon Tower
+            if (Input.GetKeyDown(KeyCode.Alpha3)){
+                towerButtons[2].onClick.Invoke();
+            }
+
+            // 4 -> Tesla Tower
+            if (Input.GetKeyDown(KeyCode.Alpha4)){
+                towerButtons[3].onClick.Invoke();
+            }
+
+            // 5 -> Mage Tower
+            if (Input.GetKeyDown(KeyCode.Alpha5)){
+                towerButtons[4].onClick.Invoke();
+            }
+        }
+
+            if (currentGhost != null)
         {
             MoveGhostWithMouse();
 
