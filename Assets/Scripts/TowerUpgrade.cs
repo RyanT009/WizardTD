@@ -1,27 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TowerUpgrade
 {
-    public int Price { get; private set; }
+    public TowerType towerType;
 
-    public int Damage { get; private set; }
+    [Header("Upgrade Info")]
+    public string upgradeName;
 
-    public float DebuffDuration { get; private set; }
-    public float ProcChance { get; private set; }
+    [TextArea]
+    public string upgradeDescription;
 
-    public float SlowingFactor { get; private set; }
+    public int upgradePrice;
+    public int sellPrice;
+}
 
-    public int SpecialDamage { get; private set; }
-
-    public TowerUpgrade(int price, int damage, float debuffduration, float procChance, float slowingFactor, int specialDamage)
-    {
-        this.Price = price;
-        this.Damage = damage;
-        this.DebuffDuration = debuffduration;
-        this.ProcChance = procChance;
-        this.SlowingFactor = slowingFactor;
-        this.SpecialDamage = specialDamage;
-    }
+public enum TowerType
+{
+    Archer,
+    Fire,
+    Cannon,
+    Tesla,
+    Mage
 }

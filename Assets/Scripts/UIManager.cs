@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject plotButtonParent;
     [SerializeField] GameObject plotParent;
 
-    [SerializeField] List<int> towerPrices = new List<int>();
     [SerializeField] List<TextMeshProUGUI> towerPriceTexts = new List<TextMeshProUGUI>();
     [SerializeField] List<Button> towerButtons = new List<Button>();
 
@@ -32,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject currentGhost;
     [SerializeField] int currentGhostIndex = -1;
-    [SerializeField] private List<int> ghostOffsets;
+    [SerializeField] private List<float> ghostOffsets;
     private GameObject snappedPlot;
 
     private Ray debugRay;
@@ -48,18 +47,28 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject buyPanel;
     [SerializeField] GameObject towerPanel;
 
+    [SerializeField] GameObject upgradePanel;
+
     [SerializeField] TextMeshProUGUI plotNumber;
-    [SerializeField] GameObject plotTowerIcon;
-    [SerializeField] TextMeshProUGUI plotTowerName;
-    [SerializeField] TextMeshProUGUI plotTowerLevel;
+    [SerializeField] GameObject towerIcon;
+    [SerializeField] TextMeshProUGUI towerNameText;
+    [SerializeField] TextMeshProUGUI towerUpgradesText;
 
-    [SerializeField] List<TextMeshProUGUI> plotTowerStats;
-    [SerializeField] List<TextMeshProUGUI> plotTowerNextStats;
-
+    [SerializeField] TextMeshProUGUI upgradeName;
+    [SerializeField] TextMeshProUGUI upgradeDesc;
     [SerializeField] Button upgradeButton;
+
     [SerializeField] Button sellButton;
 
-    [SerializeField] TextMeshProUGUI plotTowerDescription;
+    [SerializeField] GameObject specialisationPanel;
+
+    [SerializeField] TextMeshProUGUI specUpgradeName1;
+    [SerializeField] TextMeshProUGUI specUpgradeDesc1;
+    [SerializeField] Button specUpgradeButton1;
+
+    [SerializeField] TextMeshProUGUI specUpgradeName2;
+    [SerializeField] TextMeshProUGUI specUpgradeDesc2;
+    [SerializeField] Button specUpgradeButton2;
 
 
 
@@ -224,17 +233,20 @@ public class UIManager : MonoBehaviour
 
     void SetTowerPrices()
     {
-        for (int i = 0; i < towerPrices.Count; i++)
+        for (int i = 0; i < 5; i++)
         {
-            towerPriceTexts[i].text = "$" + towerPrices[i];
+            Debug.Log("I:" + i);
+            towerPriceTexts[i].text = "$" + upgradeManager.getUpgradeList(i)[0].upgradePrice;
         }
     }
 
     public void UpdateShopUI(int currentMoney)
     {
-        for (int i = 0; i < towerPrices.Count; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (currentMoney >= towerPrices[i])
+            int buyPrice = upgradeManager.getUpgradeList(i)[0].upgradePrice;
+            Debug.Log(buyPrice);
+            if (currentMoney >= buyPrice)
             {
                 towerPriceTexts[i].color = Color.yellow;
                 towerButtons[i].interactable = true;
@@ -258,7 +270,9 @@ public class UIManager : MonoBehaviour
         Vector3 offset = new Vector3(0, ghostOffsets[currentGhostIndex] + hoverHeight, 0);
         snappedPlot.GetComponent<Plot>().PlaceTowerHere(towerPrefabs[currentGhostIndex], offset);
 
-        gameManager.ChangeMoney(-towerPrices[currentGhostIndex]);
+        int buyPrice = upgradeManager.getUpgradeList(currentGhostIndex)[0].upgradePrice;
+
+        gameManager.ChangeMoney(-buyPrice);
 
         snappedPlot = null;
         currentGhostIndex = -1;
@@ -316,7 +330,7 @@ public class UIManager : MonoBehaviour
         currentPlotRange = Instantiate(rangePrefab, plot.GetComponent<Plot>().GetTower().transform.position, Quaternion.identity);
         Vector2Int currentTowerTypeAndLevel = plot.GetComponent<Plot>().GetTower().GetComponent<TurretTargeting>().GetTypeAndLevel();
 
-        float currentTowerRange = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1][2];
+        float currentTowerRange = plot.GetComponent<Plot>().GetTower().GetComponent<TurretTargeting>().getRange();
 
         float scaleMultiplier = plot.GetComponent<Plot>().GetTower().transform.localScale.x * 2f;
         currentPlotRange.transform.localScale = new Vector3(currentTowerRange, currentTowerRange, currentTowerRange) * scaleMultiplier;
@@ -354,80 +368,97 @@ public class UIManager : MonoBehaviour
             
     }
 
-
+    
     public void UpdateTowerPanel(int towerType, int towerLevel)
     {
+        Debug.Log("TOWER PANEL UPDATED");
         // Tower types
-        // 0 = mage
-        // 1 = cannon
-        // 2 = tesla
-        //
-        // Levels are given as 1 2 3
-        // Upgrades[0] = 1>2, Upgrades[1] = 2>3
+        // 0 = archer
+        // 1 = fire
+        // 2 = cannon
+        // 3 = tesla
+        // 4 = mage
 
-        plotTowerIcon.GetComponent<Image>().sprite = upgradeManager.getTowerIcons()[towerType];
+        List<string> towerNames = new List<string> { "Archer", "Fire", "Cannon", "Tesla", "Mage" };
+        List<TowerUpgrade> upgradeList = upgradeManager.getUpgradeList(towerType);
+
         plotNumber.text = "Plot " + currentPlotSelected;
-        plotTowerName.text = upgradeManager.getTowerNames()[towerType];
-        plotTowerLevel.text = "Level " + towerLevel;
-
-        Debug.Log("LEVEL :  " + towerLevel);
-        Debug.Log("TYPE :  " + towerType);
-
-        // Current damage, rate, range
-        plotTowerStats[0].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][0].ToString();
-        plotTowerStats[1].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][1].ToString();
-        plotTowerStats[2].text = upgradeManager.getTowerStats()[towerType][towerLevel - 1][2].ToString();
-
-        // Next damage, rate, range
-        if (towerLevel >= 3)
+        if (towerLevel < 4)
         {
-            plotTowerNextStats[0].text = "MAX";
-            plotTowerNextStats[1].text = "MAX";
-            plotTowerNextStats[2].text = "MAX";
+            towerNameText.text = "Level " + towerLevel.ToString() + " " + towerNames[towerType];
+        }
+        else
+        {
+            towerNameText.text = "Level 4 " + towerNames[towerType];
+        }
 
-            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: MAX";
+        upgradeButton.gameObject.SetActive(true);
+        sellButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sell: $" + upgradeList[towerLevel - 1].sellPrice.ToString();
+
+        string towerUpgradesString = "";
+
+        if (towerLevel < 5)
+        {
+            for (int i = 1; i < towerLevel; i++)
+            {
+                towerUpgradesString += upgradeList[i].upgradeName + "\n";
+            }
 
         }
         else
         {
-            plotTowerNextStats[0].text = upgradeManager.getTowerStats()[towerType][towerLevel][0].ToString();
-            plotTowerNextStats[1].text = upgradeManager.getTowerStats()[towerType][towerLevel][1].ToString();
-            plotTowerNextStats[2].text = upgradeManager.getTowerStats()[towerType][towerLevel][2].ToString();
+            for (int i = 1; i < towerLevel; i++)
+            {
+                if (i == 3)
+                {
+                    continue;
+                }
 
-            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: $" + upgradeManager.getTowerUpgradePrices()[towerType][towerLevel - 1];
+                towerUpgradesString += upgradeList[i].upgradeName + "\n";
+            }
+
         }
 
-        sellButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sell: $" + upgradeManager.getTowerSellPrices()[towerType][towerLevel - 1];
-        plotTowerDescription.text = upgradeManager.getTowerDescriptions()[towerType];
+        towerUpgradesText.text = towerUpgradesString;
 
-
-        GameObject currentTower = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower();
-
-        int money = gameManager.GetCurrency();
-        Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
-
-
-        if (currentTowerTypeAndLevel.y >= 3)
+        if (towerLevel < 3)
         {
-            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.grey;
+            upgradePanel.SetActive(true);
+            specialisationPanel.SetActive(false);
+
+            upgradeName.text = upgradeList[towerLevel].upgradeName;
+            upgradeDesc.text = upgradeList[towerLevel].upgradeDescription;
+            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: $" + upgradeList[towerLevel].upgradePrice.ToString();
+
+        }
+        else if (towerLevel == 3) // Show spec menu
+        {
+            upgradePanel.SetActive(false);
+            specialisationPanel.SetActive(true);
+
+            specUpgradeName1.text = upgradeList[towerLevel].upgradeName;
+            specUpgradeDesc1.text = upgradeList[towerLevel].upgradeDescription;
+            specUpgradeButton1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: $" + upgradeList[towerLevel].upgradePrice.ToString();
+
+            specUpgradeName2.text = upgradeList[towerLevel + 1].upgradeName;
+            specUpgradeDesc2.text = upgradeList[towerLevel + 1].upgradeDescription;
+            specUpgradeButton2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade: $" + upgradeList[towerLevel + 1].upgradePrice.ToString();
         }
         else
         {
-            int upgradeCost = upgradeManager.getTowerUpgradePrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1];
+            upgradePanel.SetActive(true);
+            specialisationPanel.SetActive(false);
 
-            if (money >= upgradeCost)
-            {
-                upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.green;
-            }
-            else
-            {
-                upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
-            }
+            upgradeName.text = "";
+            upgradeDesc.text = "";
+
+            upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX";
+            upgradeButton.gameObject.SetActive(false);
         }
 
 
     }
-
+    
     public void UpgradeTower()
     {
         GameObject currentTower = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower();
@@ -440,7 +471,8 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        int upgradeCost = upgradeManager.getTowerUpgradePrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1];
+        List<TowerUpgrade> upgradeList = upgradeManager.getUpgradeList(currentTowerTypeAndLevel.x);
+        int upgradeCost = upgradeList[currentTowerTypeAndLevel.y].upgradePrice;
 
 
 
@@ -448,9 +480,9 @@ public class UIManager : MonoBehaviour
         {
             // Upgrade tower
             gameManager.ChangeMoney(-upgradeCost);
-            Vector3 newStats = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y];
+            //Vector3 newStats = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y];
 
-            currentTower.GetComponent<TurretTargeting>().UpgradeTower(newStats);
+            currentTower.GetComponent<TurretTargeting>().UpgradeTower();
 
             UpdateTowerPanel(currentTowerTypeAndLevel.x, currentTowerTypeAndLevel.y + 1);
             GenerateRange();
@@ -463,13 +495,54 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SpecialiseTower(int specialisation)
+    {
+        // 0 = 4a
+        // 1 = 4b
+
+        GameObject currentTower = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>().GetTower();
+
+        int money = gameManager.GetCurrency();
+        Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
+
+        if (currentTowerTypeAndLevel.y > 3)
+        {
+            return;
+        }
+
+        List<TowerUpgrade> upgradeList = upgradeManager.getUpgradeList(currentTowerTypeAndLevel.x);
+        int upgradeCost = upgradeList[currentTowerTypeAndLevel.y].upgradePrice;
+
+        if (money >= upgradeCost)
+        {
+            // Upgrade tower
+            gameManager.ChangeMoney(-upgradeCost);
+            //Vector3 newStats = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y];
+
+            currentTower.GetComponent<TurretTargeting>().SpecialiseTower(specialisation);
+
+            UpdateTowerPanel(currentTowerTypeAndLevel.x, currentTowerTypeAndLevel.y + specialisation + 1);
+            GenerateRange();
+
+        }
+        else
+        {
+            // Do nothing
+            return;
+        }
+    }
+    
+
     public void SellTower()
     {
         Plot currentPlot = plotParent.transform.GetChild(currentPlotSelected).GetComponent<Plot>();
         GameObject currentTower = currentPlot.GetTower();
 
         Vector2Int currentTowerTypeAndLevel = currentTower.GetComponent<TurretTargeting>().GetTypeAndLevel();
-        gameManager.ChangeMoney(upgradeManager.getTowerSellPrices()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y - 1]);
+
+        List<TowerUpgrade> upgradeList = upgradeManager.getUpgradeList(currentTowerTypeAndLevel.x);
+        int sellPrice = upgradeList[currentTowerTypeAndLevel.y - 1].sellPrice;
+        gameManager.ChangeMoney(sellPrice);
 
         ShowBuyPanel();
 
@@ -477,4 +550,5 @@ public class UIManager : MonoBehaviour
 
         Destroy(currentPlotRange);
     }
+    
 }

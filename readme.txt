@@ -1,4 +1,4 @@
-WizardTD v0.4.1
+WizardTD v0.5.0
 
 A tower defense game where enemies are spawned in 5 increasingly more difficult waves.
 Enemies of varying sizes and speeds make their way (from multiple directions) towards your central fortress.

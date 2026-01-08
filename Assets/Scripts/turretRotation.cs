@@ -25,10 +25,11 @@ public class TurretRotation : MonoBehaviour
             targetPosition.y = objectToRotate.transform.position.y; // Lock y axis
 
             // Calculate rotation towards target
-            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - objectToRotate.transform.position);
+            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - objectToRotate.transform.position) * initialRotation;
 
             // Apply initial rotation as an offset
-            objectToRotate.transform.rotation = lookRotation * initialRotation;
+
+            objectToRotate.transform.rotation = new Quaternion(0, lookRotation.y, 0, 0);
         }
     }
 
@@ -41,5 +42,11 @@ public class TurretRotation : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         enemy = target;
+    }
+
+    public void ChangeObjectToRotate(GameObject obj)
+    {
+        initialRotation = obj.transform.localRotation;
+        objectToRotate = obj;
     }
 }

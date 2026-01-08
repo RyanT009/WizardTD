@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretTargeting : MonoBehaviour
@@ -11,8 +12,8 @@ public class TurretTargeting : MonoBehaviour
     [SerializeField] float damage;
     private float shootTimer;
 
-    [SerializeField] int type; //0 = mage, 1 = cannon, 2 = tesla
-    [SerializeField] int level;
+    [SerializeField] int type; //0 = archer, 1 = fire, 2 = cannon, 3 = tesla, 4 = mage
+    [SerializeField] int level; //1 on spawn
 
 
     [SerializeField] GameObject projectilePrefab;
@@ -36,14 +37,11 @@ public class TurretTargeting : MonoBehaviour
 
         level = 1;
 
-        damage = upgradeManager.getTowerStats()[type][level - 1][0];
-        shootTime = 1f / upgradeManager.getTowerStats()[type][level - 1][1];
-        range = upgradeManager.getTowerStats()[type][level - 1][2];
-
         targetingField = GetComponent<SphereCollider>();
-        targetingField.radius = range;
 
         rotationScript = GetComponent<TurretRotation>();
+
+        getStats();
 
         
     }
@@ -59,15 +57,33 @@ public class TurretTargeting : MonoBehaviour
         }
     }
 
-    public void UpgradeTower(Vector3 newStats)
+    public float getRange()
     {
-        damage = newStats.x;
-        shootTime = 1f / newStats.y;
-        range = newStats.z;
+        return range;
+    }
 
-        GetComponent<SphereCollider>().radius = range;
+    public void getStats()
+    {
+        Vector3 stats = GetComponent<UpgradeStats>().getStats(level);
+        damage = stats.x;
+        shootTime = 1 / stats.y;
+        range = stats.z;
 
+        targetingField.radius = range;
+    }
+
+    public void UpgradeTower()
+    {
         level++;
+        ChangeModel(level - 1);
+        getStats();
+    }
+
+    public void SpecialiseTower(int specialisation)
+    {
+        level += specialisation + 1;
+        ChangeModel(level - 1);
+        getStats();
     }
 
     public Vector2Int GetTypeAndLevel()
@@ -195,5 +211,21 @@ public class TurretTargeting : MonoBehaviour
     public void SetDamage(float newDamage)
     {
         damage = newDamage;
+    }
+
+    void ChangeModel(int index)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.GetSiblingIndex() == index)
+            {
+                child.gameObject.SetActive(true);
+                rotationScript.ChangeObjectToRotate(child.GetChild(child.childCount - 1).gameObject);
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 }
