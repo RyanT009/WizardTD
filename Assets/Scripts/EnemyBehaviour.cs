@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
+    [SerializeField] float armour;
 
     [SerializeField] int moneyWorth;
     [SerializeField] int damageToCastle;

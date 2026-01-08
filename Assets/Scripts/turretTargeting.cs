@@ -12,6 +12,8 @@ public class TurretTargeting : MonoBehaviour
     [SerializeField] float damage;
     private float shootTimer;
 
+    private bool canTargetAir = true;
+
     [SerializeField] int type; //0 = archer, 1 = fire, 2 = cannon, 3 = tesla, 4 = mage
     [SerializeField] int level; //1 on spawn
 
@@ -43,7 +45,10 @@ public class TurretTargeting : MonoBehaviour
 
         getStats();
 
-        
+        if(type == 2)
+        {
+            canTargetAir = false;
+        }
     }
 
     // Update is called once per frame
@@ -113,6 +118,11 @@ public class TurretTargeting : MonoBehaviour
             enemiesInRange.Add(other.gameObject);
             TargetSelect();
         }
+        else if (other.tag == "airEnemy" && canTargetAir) //If air enemy in range. And turret is able to target air
+        {
+            enemiesInRange.Add(other.gameObject);
+            TargetSelect();
+        }
 
         
     }
@@ -121,6 +131,11 @@ public class TurretTargeting : MonoBehaviour
     {
         
         if (other.tag == "enemy")
+        {
+            enemiesInRange.Remove(other.gameObject);
+            TargetSelect();
+        }
+        else if (other.tag == "airEnemy" && canTargetAir)
         {
             enemiesInRange.Remove(other.gameObject);
             TargetSelect();

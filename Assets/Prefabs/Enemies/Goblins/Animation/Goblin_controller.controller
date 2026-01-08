@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Goblin_test
+  m_Name: Goblin_controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -69,7 +69,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.0011278391
   m_TransitionOffset: 0
   m_ExitTime: 0.6875
   m_HasExitTime: 0

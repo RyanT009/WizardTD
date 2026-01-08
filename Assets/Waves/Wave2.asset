@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   enemyGroups:
-  - enemyPrefab: {fileID: 4726673131983453977, guid: 13d6e5446f98481498015a47bfa8df28, type: 3}
+  - enemyPrefab: {fileID: 8374753971393314942, guid: 80b2c39da2412c045a7313a27fbb200d, type: 3}
     count: 5
     spawnDelay: 1
-  - enemyPrefab: {fileID: 1258991314359982, guid: 3749b9edee740c44ea7455a4fa1b7382, type: 3}
+  - enemyPrefab: {fileID: 3079822655003654098, guid: b9de5acbd2edfa24e965da539b355fbe, type: 3}
     count: 5
     spawnDelay: 0.5
   timeBetweenGroups: 5

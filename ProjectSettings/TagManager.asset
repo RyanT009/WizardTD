@@ -12,6 +12,7 @@ TagManager:
   - worldCanvas
   - plot
   - PlotButton
+  - airEnemy
   layers:
   - Default
   - TransparentFX

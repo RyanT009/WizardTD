@@ -26077,6 +26077,26 @@ MonoBehaviour:
     upgradeDescription: 
     upgradePrice: 125
     sellPrice: 75
+  - towerType: 1
+    upgradeName: upgrade2
+    upgradeDescription: 
+    upgradePrice: 125
+    sellPrice: 75
+  - towerType: 1
+    upgradeName: upgrade3
+    upgradeDescription: 
+    upgradePrice: 125
+    sellPrice: 75
+  - towerType: 1
+    upgradeName: upgrade4a
+    upgradeDescription: 
+    upgradePrice: 125
+    sellPrice: 75
+  - towerType: 1
+    upgradeName: upgrade4b
+    upgradeDescription: 
+    upgradePrice: 125
+    sellPrice: 75
   upgradeList3:
   - towerType: 2
     upgradeName: 
