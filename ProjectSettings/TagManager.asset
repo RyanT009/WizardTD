@@ -13,6 +13,7 @@ TagManager:
   - plot
   - PlotButton
   - airEnemy
+  - Settings
   layers:
   - Default
   - TransparentFX

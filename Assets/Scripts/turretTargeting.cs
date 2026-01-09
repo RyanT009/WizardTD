@@ -218,6 +218,27 @@ public class TurretTargeting : MonoBehaviour
         projScript.SetType(turretType);
         projScript.SetTarget(currentTarget);
         projScript.PassDamage(damage);
+
+        if (type == 0)
+        {
+            Sound.PlaySound("archer");
+        }
+        else if (type == 1)
+        {
+            Sound.PlaySound("fireShoot");
+        }
+        else if (type == 2)
+        {
+            Sound.PlaySound("cannonShoot");
+        }
+        else if (type == 3)
+        {
+            Sound.PlaySound("zap");
+        }
+        else if (type == 4)
+        {
+            Sound.PlaySound("mageShoot");
+        }
     }
 
 
