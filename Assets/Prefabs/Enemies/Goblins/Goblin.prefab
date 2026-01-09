@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDistance: 0
-  moveSpeed: 15
+  moveSpeed: 11
   checkpointParent: {fileID: 0}
   currentCheckpointIndex: 0
 --- !u!114 &8131878388373878411
@@ -582,6 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   currentHealth: 0
+  armour: 0
   moneyWorth: 50
   damageToCastle: 10
   fireDeathFX: {fileID: 3487143776849925414, guid: b308436526e87b14baf630d13a6668ce, type: 3}
@@ -597,6 +598,7 @@ MonoBehaviour:
   coinFadeDelay: 2
   sinkDelay: 1.5
   sinkSpeed: 15
+  isBoss: 0
 --- !u!1 &1300070071406548
 GameObject:
   m_ObjectHideFlags: 0

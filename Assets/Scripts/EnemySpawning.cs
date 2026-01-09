@@ -59,7 +59,15 @@ public class EnemySpawning : MonoBehaviour
         enemiesLeft--;
         enemiesAlive.Remove(enemy);
 
+        if (aliveCount < 0 || enemiesLeft == 0)
+        {
+            aliveCount = 0;
+            enemiesLeft = 0;
+        }
+
         enemiesAliveText.text = enemiesLeft.ToString() + " enemies left";
+
+
     }
 
     public void SetInitialEnemyCount(int enemyCount)

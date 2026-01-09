@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fb07cf875c181478a0e75c0d0b472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 350
   currentHealth: 0
   armour: 0
   moneyWorth: 50
@@ -319,6 +319,7 @@ MonoBehaviour:
   coinFadeDelay: 2
   sinkDelay: 1.5
   sinkSpeed: 15
+  isBoss: 0
 --- !u!198 &6797318404778457261
 ParticleSystem:
   m_ObjectHideFlags: 0

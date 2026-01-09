@@ -1726,8 +1726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fb07cf875c181478a0e75c0d0b472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 50
   currentHealth: 0
+  armour: 0
   moneyWorth: 100
   damageToCastle: 15
   fireDeathFX: {fileID: 0}
@@ -1743,6 +1744,7 @@ MonoBehaviour:
   coinFadeDelay: 2
   sinkDelay: 1.5
   sinkSpeed: 15
+  isBoss: 0
 --- !u!1 &8374753971393315264
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,12 +5,13 @@ public class Sound : MonoBehaviour
 {
     private static GameObject instance;
 
-    public static AudioClip arrow, fireShoot, fireHit, cannonShoot, zap, mageShoot;
+    public static AudioClip arrow, fireShoot, fireHit, cannonShoot, zap, mageShoot, coin, heavenly, pop, chaching, piston, tripleHammer, roar2;
     static AudioSource audiosrcm;
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
         DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
@@ -20,6 +21,7 @@ public class Sound : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        */
 
         arrow = Resources.Load<AudioClip>("arrow");
         fireShoot = Resources.Load<AudioClip>("fireShoot");
@@ -27,6 +29,13 @@ public class Sound : MonoBehaviour
         cannonShoot = Resources.Load<AudioClip>("cannonShoot");
         zap = Resources.Load<AudioClip>("zap");
         mageShoot = Resources.Load<AudioClip>("mageShoot");
+        coin = Resources.Load<AudioClip>("coin");
+        heavenly = Resources.Load<AudioClip>("heavenly");
+        pop = Resources.Load<AudioClip>("pop");
+        chaching = Resources.Load<AudioClip>("chaching");
+        piston = Resources.Load<AudioClip>("piston");
+        tripleHammer = Resources.Load<AudioClip>("tripleHammer");
+        roar2 = Resources.Load<AudioClip>("roar2");
 
         audiosrcm = GetComponent<AudioSource>();
 
@@ -66,6 +75,34 @@ public class Sound : MonoBehaviour
         else if (clip == "mageShoot")
         {
             audiosrcm.PlayOneShot(mageShoot);
+        }
+        else if (clip == "coin")
+        {
+            audiosrcm.PlayOneShot(coin);
+        }
+        else if (clip == "heavenly")
+        {
+            audiosrcm.PlayOneShot(heavenly);
+        }
+        else if (clip == "pop")
+        {
+            audiosrcm.PlayOneShot(pop);
+        }
+        else if (clip == "chaching")
+        {
+            audiosrcm.PlayOneShot(chaching);
+        }
+        else if (clip == "piston")
+        {
+            audiosrcm.PlayOneShot(piston);
+        }
+        else if (clip == "tripleHammer")
+        {
+            audiosrcm.PlayOneShot(tripleHammer);
+        }
+        else if (clip == "roar2")
+        {
+            audiosrcm.PlayOneShot(roar2);
         }
         else
         {

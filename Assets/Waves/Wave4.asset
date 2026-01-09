@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Wave4
   m_EditorClassIdentifier: 
   enemyGroups:
+  - enemyPrefab: {fileID: 8374753971393314942, guid: 80b2c39da2412c045a7313a27fbb200d, type: 3}
+    count: 5
+    spawnDelay: 2
   - enemyPrefab: {fileID: 1258991314359982, guid: 3749b9edee740c44ea7455a4fa1b7382, type: 3}
-    count: 30
-    spawnDelay: 0.5
-  - enemyPrefab: {fileID: 1258991314359982, guid: 3749b9edee740c44ea7455a4fa1b7382, type: 3}
-    count: 20
-    spawnDelay: 0.25
-  - enemyPrefab: {fileID: 4726673131983453977, guid: 13d6e5446f98481498015a47bfa8df28, type: 3}
     count: 10
-    spawnDelay: 0.1
-  timeBetweenGroups: 2
+    spawnDelay: 0.6
+  - enemyPrefab: {fileID: 8374753971393314942, guid: 80b2c39da2412c045a7313a27fbb200d, type: 3}
+    count: 10
+    spawnDelay: 2
+  timeBetweenGroups: 3

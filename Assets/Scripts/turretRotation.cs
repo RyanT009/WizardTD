@@ -29,7 +29,7 @@ public class TurretRotation : MonoBehaviour
 
             // Apply initial rotation as an offset
 
-            objectToRotate.transform.rotation = new Quaternion(0, lookRotation.y, 0, 0);
+            //objectToRotate.transform.rotation = new Quaternion(0, lookRotation.y, 0, 0);
         }
     }
 

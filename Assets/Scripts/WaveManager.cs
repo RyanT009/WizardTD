@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] float timeBetweenWaves;
 
     [SerializeField] TooltipManager tooltipManager;
+    [SerializeField] GameManager gameManager;
 
 
     private void Start()
@@ -50,6 +52,7 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("All waves complete!");
+        Invoke("WinScreen", 8f);
     }
 
     IEnumerator SpawnWave(EnemyWave wave)
@@ -64,5 +67,12 @@ public class WaveManager : MonoBehaviour
 
             yield return new WaitForSeconds(wave.timeBetweenGroups);
         }
+
+        gameManager.ChangeSkillPoints(1);
+    }
+
+    void WinScreen()
+    {
+        SceneManager.LoadScene(3);
     }
 }

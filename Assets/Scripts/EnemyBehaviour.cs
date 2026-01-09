@@ -37,6 +37,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] float sinkDelay; // How long after dying to start sinking
     [SerializeField] float sinkSpeed; // How fast to sink
 
+    [SerializeField] bool isBoss;
+
 
 
     // Start is called before the first frame update
@@ -93,31 +95,19 @@ public class EnemyBehaviour : MonoBehaviour
 
         gameManager.ChangeMoney(moneyWorth); // Increase money since enemy has been killed by player
 
-        if(deathType == "fire") // If player killed the enemy
-        {
-            Debug.Log("firedeath");
-            animator.SetBool("Death", true); // Trigger death animation
-            //GameObject particleEffectInstance = Instantiate(fireDeathFX, transform.position, Quaternion.identity); // Instantiate the death particle effect
-            //particleEffectInstance.transform.localScale = gameObject.transform.localScale;
-
-            //SpawnGoldCoin(); // Spawns a coin next to the dead enemy
-        }
-        else if(deathType == "cannon")
-        {
-            Debug.Log("cannondeath");
-            animator.SetBool("Death", true); // Trigger death animation
-        }
-        else if(deathType == "tesla")
-        {
-            Debug.Log("tesladeath");
-            animator.SetBool("Death", true); // Trigger death animation
-        }
+        animator.SetBool("Death", true); // Trigger death animation
 
 
         //DeathAnimation();
-        
 
-        StartSink(); // Animate model to sink through floor
+        if (!isBoss)
+        {
+            StartSink(); // Animate model to sink through floor
+        }
+        else
+        {
+            Sound.PlaySound("roar2");
+        }
     }
 
     void DeathAnimation()

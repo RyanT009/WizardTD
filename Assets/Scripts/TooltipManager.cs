@@ -57,6 +57,7 @@ public class TooltipManager : MonoBehaviour
         if (relativeMovement >= 240)
         {
             relativeMovement = 240;
+            Sound.PlaySound("pop");
             CancelInvoke("MoveUp");
         }
     }

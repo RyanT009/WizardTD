@@ -21,9 +21,9 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        
 
-        if(projectileType == "tesla")
+
+        if (projectileType == "tesla")
         {
             //Get direction of target
             Vector3 direction = (target.transform.position - transform.position).normalized;
@@ -40,16 +40,28 @@ public class Projectile : MonoBehaviour
 
             teslaFX.Play();
         }
+        else if (projectileType == "archer")
+        {
+            Vector3 direction = (target.transform.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 
     void FixedUpdate()
     {
         // If the projectile has a target, calculate the direction and move towards the target
-        if (target.GetComponent<EnemyBehaviour>().AliveCheck() == true)
+        if (target && target.GetComponent<EnemyBehaviour>() != null)
         {
-            Vector3 direction = (target.transform.position - transform.position).normalized;
-            //transform.forward = direction;
-            rb.velocity = direction * movementSpeed;
+            if (target.GetComponent<EnemyBehaviour>().AliveCheck() == true)
+            {
+                Vector3 direction = (target.transform.position - transform.position).normalized;
+                //transform.forward = direction;
+                rb.velocity = direction * movementSpeed;
+            }
+            else // If enemy is destroyed for whatever reason
+            {
+                Destroy(gameObject); //Destroy projectile
+            }
         }
         else // If enemy is destroyed for whatever reason
         {
@@ -78,6 +90,10 @@ public class Projectile : MonoBehaviour
         // If the projectile hits the target, damage it
         if (other.gameObject == target)
         {
+            if (projectileType == "fire")
+            {
+                Sound.PlaySound("fireHit");
+            }
             ImpactFX();
 
             EnemyBehaviour behaviourScript = target.GetComponent<EnemyBehaviour>();

@@ -958,11 +958,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-  - {x: 10, y: 0.5, z: 8}
-  - {x: 15, y: 0.7, z: 8.5}
-  - {x: 20, y: 0.85, z: 9}
-  - {x: 30, y: 1, z: 10}
-  - {x: 200, y: 0.33, z: 10}
+  - {x: 10, y: 0.7, z: 8}
+  - {x: 10, y: 0.5, z: 8.5}
+  - {x: 20, y: 0.5, z: 9}
+  - {x: 25, y: 3, z: 11}
+  - {x: 200, y: 0.33, z: 14}
 --- !u!1 &8165047933792039449
 GameObject:
   m_ObjectHideFlags: 0

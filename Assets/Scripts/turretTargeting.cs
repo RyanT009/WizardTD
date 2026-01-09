@@ -86,6 +86,7 @@ public class TurretTargeting : MonoBehaviour
 
     public void SpecialiseTower(int specialisation)
     {
+        Sound.PlaySound("heavenly");
         level += specialisation + 1;
         ChangeModel(level - 1);
         getStats();
@@ -221,7 +222,7 @@ public class TurretTargeting : MonoBehaviour
 
         if (type == 0)
         {
-            Sound.PlaySound("archer");
+            Sound.PlaySound("arrow");
         }
         else if (type == 1)
         {

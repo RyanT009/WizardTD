@@ -361,6 +361,7 @@ public class UIManager : MonoBehaviour
         int buyPrice = upgradeManager.getUpgradeList(currentGhostIndex)[0].upgradePrice;
 
         gameManager.ChangeMoney(-buyPrice);
+        Sound.PlaySound("tripleHammer");
 
         snappedPlot = null;
         currentGhostIndex = -1;
@@ -568,6 +569,7 @@ public class UIManager : MonoBehaviour
         {
             // Upgrade tower
             gameManager.ChangeMoney(-upgradeCost);
+            Sound.PlaySound("coin");
             //Vector3 newStats = upgradeManager.getTowerStats()[currentTowerTypeAndLevel.x][currentTowerTypeAndLevel.y];
 
             currentTower.GetComponent<TurretTargeting>().UpgradeTower();
@@ -631,6 +633,7 @@ public class UIManager : MonoBehaviour
         List<TowerUpgrade> upgradeList = upgradeManager.getUpgradeList(currentTowerTypeAndLevel.x);
         int sellPrice = upgradeList[currentTowerTypeAndLevel.y - 1].sellPrice;
         gameManager.ChangeMoney(sellPrice);
+        Sound.PlaySound("chaching");
 
         ShowBuyPanel();
 
@@ -722,6 +725,7 @@ public class UIManager : MonoBehaviour
 
     public void TriggerSkillTree()
     {
+        Sound.PlaySound("piston");
         if (!isTreeOpen)
         {
             Time.timeScale = 0;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CastleManager : MonoBehaviour
 {
@@ -36,5 +37,6 @@ public class CastleManager : MonoBehaviour
     void GameOver()
     {
         Debug.Log("GAME OVER!");
+        SceneManager.LoadScene(2);
     }
 }

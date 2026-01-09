@@ -53,18 +53,33 @@ public class HealthBar : MonoBehaviour
     
     public void SetHealth(float currentHealth, float maxHealth)
     {
-        isVisible = true;
-        fill.fillAmount = currentHealth / maxHealth;
-
-        if (fill.fillAmount < 1f)
+        try
         {
-            border.enabled = true;
-            fill.enabled = true;
+            isVisible = true;
+            fill.fillAmount = currentHealth / maxHealth;
+
+            if (fill.fillAmount < 1f)
+            {
+                border.enabled = true;
+                fill.enabled = true;
+            }
         }
+        catch 
+        {
+            ;
+        }
+
     }
 
     public void KillHealthbar()
     {
-        Destroy(gameObject);
+        try
+        {
+            Destroy(gameObject);
+        }
+        catch
+        { 
+
+        }
     }
 }
