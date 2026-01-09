@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 4da6445d29015684280ce8c54fa34d7f
+guid: f23ccb381b8a1404fb6348fbde99cdd3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark_11
+    second: {fileID: 2100000, guid: e4d0e58a23cde404cb18af3efb9221de, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

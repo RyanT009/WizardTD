@@ -1,14 +1,24 @@
 fileFormatVersion: 2
-guid: 4da6445d29015684280ce8c54fa34d7f
+guid: 1856dc1ddd4e48a44a1b66cdff1ea15b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark_11
+    second: {fileID: 2100000, guid: 3464b252e39e8c34dbbbd2549ab1097f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Plates_01
+    second: {fileID: 2100000, guid: b4dd2d2d7a62b304ba726f1bb3c69fdf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

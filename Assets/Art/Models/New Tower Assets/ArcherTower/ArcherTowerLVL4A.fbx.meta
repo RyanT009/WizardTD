@@ -1,14 +1,34 @@
 fileFormatVersion: 2
-guid: 4da6445d29015684280ce8c54fa34d7f
+guid: 477b867d1ba7fe5419a3af1331616661
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_01
+    second: {fileID: 2100000, guid: 52db29c838f8738458726aa74d725fda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_02
+    second: {fileID: 2100000, guid: 9eb576817eeecd4499db75ff7c338621, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Plates_01
+    second: {fileID: 2100000, guid: b4dd2d2d7a62b304ba726f1bb3c69fdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_02_1k
+    second: {fileID: 2100000, guid: 9eb576817eeecd4499db75ff7c338621, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
