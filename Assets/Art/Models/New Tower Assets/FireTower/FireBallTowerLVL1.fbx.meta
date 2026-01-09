@@ -3,7 +3,17 @@ guid: 55ba159d831e4564c8317e49123b08a1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Church_Wall
+    second: {fileID: 2100000, guid: 840cadab7e6ec5d4398abe4559befacd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_Tiles_06
+    second: {fileID: 2100000, guid: af35856dac570434daa1a52e6b35ca9f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
